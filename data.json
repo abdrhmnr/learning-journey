@@ -752,7 +752,7 @@
   "achievements": [
     "first_step"
   ],
-  "lastModified": "2026-03-28T15:45:11.168Z",
+  "lastModified": "2026-03-28T15:58:42.663Z",
   "pomodoroLog": {},
   "weeklyGoals": null,
   "tags": [
@@ -764,7 +764,11 @@
   ],
   "_nightActivity": false,
   "_earlyActivity": false,
-  "lang": "en",
-  "lastSync": "2026-03-28T15:45:14.564Z",
-  "syncDevice": "desktop_q2wn"
+  "lang": "ar",
+  "lastSync": "2026-03-28T15:58:45.919Z",
+  "syncDevice": "desktop_q2wn",
+  "flashcards": {
+    "decks": []
+  },
+  "ytPlaylists": []
 }
