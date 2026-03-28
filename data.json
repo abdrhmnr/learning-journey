@@ -752,7 +752,7 @@
   "achievements": [
     "first_step"
   ],
-  "lastModified": "2026-03-28T15:10:13.822Z",
+  "lastModified": "2026-03-28T15:45:11.168Z",
   "pomodoroLog": {},
   "weeklyGoals": null,
   "tags": [
@@ -764,6 +764,7 @@
   ],
   "_nightActivity": false,
   "_earlyActivity": false,
-  "lastSync": "2026-03-28T15:11:54.038Z",
+  "lang": "en",
+  "lastSync": "2026-03-28T15:45:14.564Z",
   "syncDevice": "desktop_q2wn"
 }
