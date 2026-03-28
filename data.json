@@ -157,7 +157,7 @@
     {
       "id": "plan_dl",
       "name": "Deep Learning + NLP + RAG",
-      "icon": "🤖",
+      "icon": "🧠",
       "groups": [
         {
           "id": "g4",
@@ -930,8 +930,10 @@
   "achievements": [
     "first_step"
   ],
-  "lastModified": "2026-03-28T16:14:54.954Z",
-  "pomodoroLog": {},
+  "lastModified": "2026-03-28T18:13:24.487Z",
+  "pomodoroLog": {
+    "2026-03-28": 25
+  },
   "weeklyGoals": null,
   "tags": [
     "سهل",
@@ -943,12 +945,206 @@
   "_nightActivity": false,
   "_earlyActivity": false,
   "lang": "ar",
-  "lastSync": "2026-03-28T16:14:58.368Z",
+  "lastSync": "2026-03-28T19:09:29.426Z",
   "syncDevice": "desktop_q2wn",
   "flashcards": {
     "decks": []
   },
-  "ytPlaylists": [],
+  "ytPlaylists": [
+    {
+      "id": "_mnambshw9r9mf",
+      "name": "cs224n",
+      "url": "",
+      "planId": "plan_dl",
+      "videos": [
+        {
+          "id": "_mnamclp3iykwo",
+          "title": "Lecture 1",
+          "url": "",
+          "duration": "1:20",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamcwoxyev1r",
+          "title": "Lecture 2",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamd0z6mvg7g",
+          "title": "Lecture 3",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamde31k7nae",
+          "title": "Lecture 4",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamdjn1jo2pw",
+          "title": "Lecture 5",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamdrb8a9p3k",
+          "title": "Lecture 6",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamdzfbk8qx6",
+          "title": "Lecture 7",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mname4lfr1dt4",
+          "title": "Lecture 8",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mname9zlhhwle",
+          "title": "Lecture 9",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamehoa8a7s0",
+          "title": "Lecture 10",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamenml77kh4",
+          "title": "Lecture 11",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamesjpv14fk",
+          "title": "Lecture 12",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnameyz6ho90p",
+          "title": "Lecture 13",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamf4635oeav",
+          "title": "Lecture 14",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamfbhaa8i42",
+          "title": "Lecture 15",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamfgws6ifua",
+          "title": "Lecture 16",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamfm3tzy96o",
+          "title": "Lecture 17",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamfqrc9lnik",
+          "title": "Lecture 18",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamfzacovs7a",
+          "title": "Lecture 19",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamg7ljyyuoe",
+          "title": "Lecture 20",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamgen5vyy7g",
+          "title": "Lecture 21",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamgj51zv54x",
+          "title": "Lecture 22",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        },
+        {
+          "id": "_mnamgnhf3ajvi",
+          "title": "Lecture 23",
+          "url": "",
+          "duration": "",
+          "watched": false,
+          "notes": ""
+        }
+      ],
+      "createdAt": "2026-03-28T17:42:47.300Z"
+    }
+  ],
   "xp": {
     "points": 0,
     "history": []
