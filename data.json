@@ -547,6 +547,184 @@
           ]
         }
       ]
+    },
+    {
+      "id": "_mnaj6sbuftc6x",
+      "name": "Machine Learning",
+      "icon": "🤖",
+      "groups": [
+        {
+          "id": "_mnaj6sbumwtbh",
+          "name": "الأساسيات",
+          "collapsed": false,
+          "tasks": [
+            {
+              "id": "_mnaj6sbumg7uo",
+              "name": "NumPy & Pandas",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mnaj6sbuygxkp",
+              "name": "Matplotlib & Seaborn",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mnaj6sbuul2zl",
+              "name": "Statistics Basics",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mnaj6sbuix6q8",
+              "name": "EDA",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            }
+          ]
+        },
+        {
+          "id": "_mnaj6sbuv2dnw",
+          "name": "النماذج",
+          "collapsed": false,
+          "tasks": [
+            {
+              "id": "_mnaj6sbuy1uw6",
+              "name": "Linear Regression",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mnaj6sbu6aqlz",
+              "name": "Logistic Regression",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mnaj6sbumghu4",
+              "name": "Decision Trees",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mnaj6sbuf9m3d",
+              "name": "Random Forest",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mnaj6sbu7vv60",
+              "name": "SVM",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mnaj6sbuuzwkc",
+              "name": "KNN",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            }
+          ]
+        },
+        {
+          "id": "_mnaj6sbuzudd8",
+          "name": "متقدم",
+          "collapsed": false,
+          "tasks": [
+            {
+              "id": "_mnaj6sbu2vbj8",
+              "name": "Cross Validation",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mnaj6sbujvb2a",
+              "name": "Hyperparameter Tuning",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mnaj6sbuuuplt",
+              "name": "Feature Engineering",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mnaj6sbu874mt",
+              "name": "Pipeline",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mnaj6sbujqlxd",
+              "name": "مشروع ML كامل",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            }
+          ]
+        }
+      ]
     }
   ],
   "projects": [
@@ -752,7 +930,7 @@
   "achievements": [
     "first_step"
   ],
-  "lastModified": "2026-03-28T15:58:42.663Z",
+  "lastModified": "2026-03-28T16:14:54.954Z",
   "pomodoroLog": {},
   "weeklyGoals": null,
   "tags": [
@@ -765,10 +943,17 @@
   "_nightActivity": false,
   "_earlyActivity": false,
   "lang": "ar",
-  "lastSync": "2026-03-28T15:58:45.919Z",
+  "lastSync": "2026-03-28T16:14:58.368Z",
   "syncDevice": "desktop_q2wn",
   "flashcards": {
     "decks": []
   },
-  "ytPlaylists": []
+  "ytPlaylists": [],
+  "xp": {
+    "points": 0,
+    "history": []
+  },
+  "habits": [],
+  "countdowns": [],
+  "stickyNotes": []
 }
