@@ -1,239 +1,115 @@
-// =============================================================
-//  GITHUB SYNC ENGINE
-//  يحفظ ويقرأ البيانات من/إلى ملف data.json في GitHub repo
-// =============================================================
-
+/*  GITHUB SYNC ENGINE  */
 const SyncEngine = {
     config: null,
     isSyncing: false,
-    lastSyncHash: null,
-    pendingSave: false,
-    saveTimer: null,
-
-    // ==================
-    //  SETUP
-    // ==================
+    lastSHA: null,
+    timer: null,
 
     getConfig() {
-        try {
-            const raw = localStorage.getItem('journey_sync_config');
-            return raw ? JSON.parse(raw) : null;
-        } catch {
-            return null;
-        }
+        try { return JSON.parse(localStorage.getItem('journey_sync_cfg') || 'null'); }
+        catch { return null; }
     },
 
-    saveConfig(config) {
-        localStorage.setItem('journey_sync_config', JSON.stringify(config));
-        this.config = config;
+    saveConfig(c) {
+        localStorage.setItem('journey_sync_cfg', JSON.stringify(c));
+        this.config = c;
     },
 
     isConfigured() {
         this.config = this.getConfig();
-        return this.config && this.config.token && this.config.username && this.config.repo;
+        return !!(this.config && this.config.token && this.config.username && this.config.repo);
     },
 
-    // ==================
-    //  GITHUB API
-    // ==================
-
-    async apiRequest(method, path, body = null) {
-        const url = `https://api.github.com/repos/${this.config.username}/${this.config.repo}${path}`;
-
-        const headers = {
-            'Authorization': `token ${this.config.token}`,
-            'Accept': 'application/vnd.github.v3+json',
-        };
-
-        if (body) headers['Content-Type'] = 'application/json';
-
-        try {
-            const response = await fetch(url, {
+    async api(method, path, body) {
+        const r = await fetch(
+            `https://api.github.com/repos/${this.config.username}/${this.config.repo}${path}`,
+            {
                 method,
-                headers,
+                headers: {
+                    'Authorization': `token ${this.config.token}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    ...(body ? { 'Content-Type': 'application/json' } : {})
+                },
                 body: body ? JSON.stringify(body) : null
-            });
-
-            if (response.status === 404 && method === 'GET') {
-                return { notFound: true };
             }
-
-            if (!response.ok) {
-                const err = await response.json().catch(() => ({}));
-                throw new Error(err.message || `HTTP ${response.status}`);
-            }
-
-            return await response.json();
-        } catch (error) {
-            console.error('GitHub API Error:', error);
-            throw error;
-        }
+        );
+        if (r.status === 404) return { _notFound: true };
+        if (!r.ok) throw new Error(`GitHub API ${r.status}`);
+        return r.json();
     },
 
-    // ==================
-    //  READ DATA
-    // ==================
-
-    async loadFromGitHub() {
+    async loadRemote() {
         if (!this.isConfigured()) return null;
-
-        this.updateSyncStatus('syncing');
-
+        this.setStatus('syncing');
         try {
-            const result = await this.apiRequest('GET', '/contents/data.json');
-
-            if (result.notFound) {
-                this.updateSyncStatus('synced');
-                return null; // ملف لا يوجد بعد
-            }
-
-            this.lastSyncHash = result.sha;
-            const content = atob(result.content);
-            const data = JSON.parse(decodeURIComponent(escape(content)));
-
-            this.updateSyncStatus('synced');
-            return data;
-
-        } catch (error) {
-            console.error('Load from GitHub failed:', error);
-            this.updateSyncStatus('error');
+            const r = await this.api('GET', '/contents/data.json');
+            if (r._notFound) { this.setStatus('synced'); return null; }
+            this.lastSHA = r.sha;
+            const txt = decodeURIComponent(escape(atob(r.content)));
+            this.setStatus('synced');
+            return JSON.parse(txt);
+        } catch (e) {
+            console.error('Load failed:', e);
+            this.setStatus('error');
             return null;
         }
     },
 
-    // ==================
-    //  WRITE DATA
-    // ==================
-
-    async saveToGitHub(data) {
-        if (!this.isConfigured()) return false;
-        if (this.isSyncing) {
-            this.pendingSave = true;
-            return false;
-        }
-
+    async saveRemote(data) {
+        if (!this.isConfigured() || this.isSyncing) return false;
         this.isSyncing = true;
-        this.updateSyncStatus('syncing');
-
+        this.setStatus('syncing');
         try {
-            // نحتاج الـ SHA الحالي
-            let sha = this.lastSyncHash;
-
-            if (!sha) {
+            if (!this.lastSHA) {
                 try {
-                    const existing = await this.apiRequest('GET', '/contents/data.json');
-                    if (!existing.notFound) {
-                        sha = existing.sha;
-                    }
-                } catch {
-                    // الملف غير موجود، سننشئه
-                }
+                    const ex = await this.api('GET', '/contents/data.json');
+                    if (!ex._notFound) this.lastSHA = ex.sha;
+                } catch {}
             }
-
-            const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-
             const body = {
-                message: `Update data - ${new Date().toISOString()}`,
-                content: content,
+                message: `sync ${new Date().toISOString()}`,
+                content: btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2)))),
                 branch: 'main'
             };
-
-            if (sha) body.sha = sha;
-
-            const result = await this.apiRequest('PUT', '/contents/data.json', body);
-
-            this.lastSyncHash = result.content.sha;
-            this.updateSyncStatus('synced');
+            if (this.lastSHA) body.sha = this.lastSHA;
+            const r = await this.api('PUT', '/contents/data.json', body);
+            this.lastSHA = r.content.sha;
+            this.setStatus('synced');
             this.isSyncing = false;
-
-            // لو في حفظ معلق، نفذه
-            if (this.pendingSave) {
-                this.pendingSave = false;
-                // انتظر ثانية واحدة قبل الحفظ مرة أخرى
-                setTimeout(() => this.debouncedSave(data), 1000);
-            }
-
             return true;
-
-        } catch (error) {
-            console.error('Save to GitHub failed:', error);
-            this.updateSyncStatus('error');
+        } catch (e) {
+            console.error('Save failed:', e);
+            this.setStatus('error');
             this.isSyncing = false;
             return false;
         }
     },
 
-    // ==================
-    //  DEBOUNCED SAVE
-    //  ينتظر 3 ثواني بعد آخر تعديل قبل الحفظ
-    // ==================
-
     debouncedSave(data) {
-        if (this.saveTimer) clearTimeout(this.saveTimer);
-
-        this.saveTimer = setTimeout(async () => {
-            // حفظ محلي فوري دائماً
-            localStorage.setItem('journey_app_v3', JSON.stringify(data));
-
-            // حفظ على GitHub
-            if (this.isConfigured()) {
-                await this.saveToGitHub(data);
-            }
-        }, 3000); // 3 ثواني انتظار
-
-        // حفظ محلي فوري (بدون انتظار)
+        if (this.timer) clearTimeout(this.timer);
         localStorage.setItem('journey_app_v3', JSON.stringify(data));
+        if (!this.isConfigured()) return;
+        this.timer = setTimeout(() => this.saveRemote(data), 3000);
     },
 
-    // ==================
-    //  SYNC STATUS UI
-    // ==================
-
-    updateSyncStatus(status) {
+    setStatus(s) {
         const el = document.getElementById('sync-status');
         if (!el) return;
-
-        const states = {
-            synced: { text: '● متزامن', class: 'synced' },
-            syncing: { text: '● يزامن...', class: 'syncing' },
-            error: { text: '● خطأ', class: 'error' },
-            local: { text: '● محلي', class: 'local' }
-        };
-
-        const state = states[status] || states.local;
-        el.textContent = state.text;
-        el.className = `sync-status ${state.class}`;
+        const m = { synced: ['● متزامن', 'synced'], syncing: ['● يزامن...', 'syncing'], error: ['● خطأ', 'error'], local: ['● محلي', ''] };
+        const v = m[s] || m.local;
+        el.textContent = v[0];
+        el.className = 'sync-status ' + v[1];
     },
 
-    // ==================
-    //  VALIDATE CONNECTION
-    // ==================
-
-    async validateConnection(username, repo, token) {
-        const url = `https://api.github.com/repos/${username}/${repo}`;
-
+    async validate(u, r, t) {
         try {
-            const response = await fetch(url, {
-                headers: {
-                    'Authorization': `token ${token}`,
-                    'Accept': 'application/vnd.github.v3+json'
-                }
+            const res = await fetch(`https://api.github.com/repos/${u}/${r}`, {
+                headers: { 'Authorization': `token ${t}`, 'Accept': 'application/vnd.github.v3+json' }
             });
-
-            if (response.ok) return { valid: true };
-
-            if (response.status === 404) {
-                return { valid: false, error: 'الـ Repository غير موجود. أنشئه أولاً على GitHub.' };
-            }
-
-            if (response.status === 401) {
-                return { valid: false, error: 'الـ Token غير صحيح أو منتهي الصلاحية.' };
-            }
-
-            return { valid: false, error: `خطأ: ${response.status}` };
-
-        } catch (error) {
-            return { valid: false, error: 'لا يمكن الاتصال بـ GitHub. تحقق من الإنترنت.' };
-        }
+            if (res.ok) return { ok: true };
+            if (res.status === 404) return { ok: false, msg: 'Repository غير موجود' };
+            if (res.status === 401) return { ok: false, msg: 'Token غير صحيح' };
+            return { ok: false, msg: 'خطأ ' + res.status };
+        } catch { return { ok: false, msg: 'لا يوجد اتصال' }; }
     }
 };

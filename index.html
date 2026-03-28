@@ -7,41 +7,36 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <!-- Setup Screen -->
-    <div id="setup-screen" class="setup-screen">
+    <div id="setup-screen" class="setup-screen" style="display:none">
         <div class="setup-card">
             <h1>🎯 إعداد رحلة التعلم</h1>
-            <p>لحفظ بياناتك والوصول إليها من أي مكان، نحتاج ربط التطبيق بحسابك على GitHub</p>
-
+            <p>لحفظ بياناتك والوصول إليها من أي مكان، اربط التطبيق بحسابك على GitHub</p>
             <div class="setup-steps">
                 <div class="setup-step">
                     <h3>الخطوة 1: إنشاء GitHub Token</h3>
                     <ol>
                         <li>اذهب إلى <a href="https://github.com/settings/tokens/new" target="_blank">GitHub Token Settings</a></li>
                         <li>اكتب اسم: <code>learning-journey</code></li>
-                        <li>اختر صلاحية: <code>repo</code> (كامل)</li>
-                        <li>اضغط <strong>Generate token</strong></li>
-                        <li>انسخ الـ Token</li>
+                        <li>في Expiration اختر: <code>No expiration</code></li>
+                        <li>فعّل صلاحية: <code>repo</code> (كامل)</li>
+                        <li>اضغط <strong>Generate token</strong> وانسخه</li>
                     </ol>
                 </div>
-
                 <div class="setup-step">
                     <h3>الخطوة 2: أدخل البيانات</h3>
                     <div class="setup-form">
                         <label>GitHub Username</label>
-                        <input type="text" id="setup-username" placeholder="مثال: ahmed123">
-
+                        <input type="text" id="setup-username" placeholder="مثال: abdrhmnr">
                         <label>اسم الـ Repository</label>
-                        <input type="text" id="setup-repo" placeholder="مثال: learning-journey" value="learning-journey">
-
+                        <input type="text" id="setup-repo" value="learning-journey">
                         <label>GitHub Token</label>
                         <input type="password" id="setup-token" placeholder="ghp_xxxxxxxxxxxx">
-
                         <button class="btn btn-primary" onclick="saveSetup()" style="width:100%;margin-top:1rem;padding:0.75rem">
                             🚀 بدء الرحلة
                         </button>
-
-                        <button class="btn btn-ghost" onclick="skipSetup()" style="width:100%;margin-top:0.5rem;padding:0.75rem">
+                        <button class="btn btn-ghost" onclick="skipSetup()" style="width:100%;margin-top:0.5rem">
                             تخطي (حفظ محلي فقط)
                         </button>
                     </div>
@@ -58,7 +53,7 @@
                 <button class="sidebar-close" onclick="toggleSidebar()">✕</button>
             </div>
             <nav class="sidebar-nav" id="sidebar-nav">
-                <button class="nav-item active" data-section="dashboard" onclick="navigate('dashboard',this)">
+                <button class="nav-item active" onclick="navigate('dashboard',this)">
                     <span class="nav-icon">📊</span><span>لوحة التحكم</span>
                 </button>
                 <div class="nav-divider">خطط التعلم</div>
@@ -83,21 +78,20 @@
                 </button>
             </nav>
             <div class="sidebar-footer">
-                <div class="sync-status" id="sync-status">●</div>
-                <button class="btn-icon" onclick="forceSyncNow()" title="مزامنة الآن">🔄</button>
+                <span class="sync-status" id="sync-status">● محلي</span>
+                <button class="btn-icon" onclick="forceSyncNow()" title="مزامنة">🔄</button>
                 <button class="btn-icon" onclick="exportData()" title="تصدير">💾</button>
                 <button class="btn-icon" onclick="importData()" title="استيراد">📥</button>
                 <button class="btn-icon" onclick="toggleTheme()" title="المظهر">🌙</button>
-                <button class="btn-icon" onclick="openSettings()" title="الإعدادات">⚙️</button>
+                <button class="btn-icon" onclick="openSettings()" title="إعدادات">⚙️</button>
             </div>
         </aside>
-
         <main class="main">
             <header class="topbar">
                 <button class="menu-btn" onclick="toggleSidebar()">☰</button>
                 <div class="topbar-info">
                     <span id="current-date"></span>
-                    <span class="streak-badge" id="streak-badge"></span>
+                    <span class="streak-badge" id="streak-badge">🔥 0</span>
                 </div>
                 <div class="topbar-search">
                     <input type="text" placeholder="بحث..." id="search-input" oninput="handleSearch(this.value)">
