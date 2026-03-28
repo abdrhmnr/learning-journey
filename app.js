@@ -1598,18 +1598,58 @@ document.addEventListener('keydown', e => {
 // =============================================================
 //  INIT
 // =============================================================
-load();
-applyTheme();
-updateStreak();
-render();
 
-// Auto-save
-setInterval(save, 15000);
+async function initApp() {
+    // تحميل البيانات
+    await load();
+    applyTheme();
+    updateStreak();
 
-// Welcome
-const stats = getStats();
-if (stats.doneTasks > 0) {
-    toast(`مرحباً! أنجزت ${stats.doneTasks} موضوع حتى الآن 💪`, 'info');
-} else {
-    toast('مرحباً! ابدأ رحلتك اليوم 🚀', 'info');
+    // تحقق من الإعداد
+    const config = SyncEngine.getConfig();
+
+    if (!config) {
+        // أول مرة: أظهر شاشة الإعداد
+        document.getElementById('setup-screen').style.display = 'flex';
+        document.getElementById('app').style.display = 'none';
+    } else {
+        // مُعد مسبقاً
+        startApp();
+    }
+
+    // تحديث حالة المزامنة
+    if (SyncEngine.isConfigured()) {
+        SyncEngine.updateSyncStatus('synced');
+    } else {
+        SyncEngine.updateSyncStatus('local');
+    }
+
+    // حفظ تلقائي كل 30 ثانية
+    setInterval(save, 30000);
+
+    // مزامنة من GitHub كل 5 دقائق
+    setInterval(async () => {
+        if (SyncEngine.isConfigured()) {
+            const remote = await SyncEngine.loadFromGitHub();
+            if (remote && remote.lastActive > data.lastActive) {
+                data = remote;
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                render();
+                toast('تم تحديث البيانات من جهاز آخر 🔄', 'info');
+            }
+        }
+    }, 300000); // 5 دقائق
 }
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        save();
+        toast('تم الحفظ 💾', 'success');
+    }
+    if (e.key === 'Escape') closeModal();
+});
+
+// Start
+initApp();
