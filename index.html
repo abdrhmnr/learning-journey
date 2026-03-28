@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رحلة التعلم</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
+</head>
+<body>
+    <div id="app">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">🎯 رحلتي</h1>
+                <button class="sidebar-close" onclick="toggleSidebar()">✕</button>
+            </div>
+            <nav class="sidebar-nav" id="sidebar-nav">
+                <button class="nav-item active" data-section="dashboard" onclick="navigate('dashboard', this)">
+                    <span class="nav-icon">📊</span>
+                    <span>لوحة التحكم</span>
+                </button>
+                <div class="nav-divider">خطط التعلم</div>
+                <div id="plans-nav"></div>
+                <button class="nav-item add-nav" onclick="addNewPlan()">
+                    <span class="nav-icon">➕</span>
+                    <span>خطة جديدة</span>
+                </button>
+                <div class="nav-divider">المشاريع</div>
+                <div id="projects-nav"></div>
+                <button class="nav-item add-nav" onclick="addNewProject()">
+                    <span class="nav-icon">➕</span>
+                    <span>مشروع جديد</span>
+                </button>
+                <div class="nav-divider">أخرى</div>
+                <button class="nav-item" data-section="calendar" onclick="navigate('calendar', this)">
+                    <span class="nav-icon">📅</span>
+                    <span>التقويم</span>
+                </button>
+                <button class="nav-item" data-section="resources" onclick="navigate('resources', this)">
+                    <span class="nav-icon">📖</span>
+                    <span>المصادر</span>
+                </button>
+                <button class="nav-item" data-section="journal" onclick="navigate('journal', this)">
+                    <span class="nav-icon">📝</span>
+                    <span>اليوميات</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="btn-icon" onclick="exportData()" title="تصدير">💾</button>
+                <button class="btn-icon" onclick="importData()" title="استيراد">📥</button>
+                <button class="btn-icon" onclick="toggleTheme()" title="المظهر">🌙</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main" id="main">
+            <header class="topbar">
+                <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+                <div class="topbar-info">
+                    <span id="current-date"></span>
+                    <span class="streak-badge" id="streak-badge"></span>
+                </div>
+                <div class="topbar-search">
+                    <input type="text" placeholder="بحث..." id="search-input" oninput="handleSearch(this.value)">
+                </div>
+            </header>
+            <div class="content" id="content">
+                <!-- Dynamic content rendered here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-backdrop" id="modal-backdrop" onclick="closeModal()">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 id="modal-title"></h2>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
