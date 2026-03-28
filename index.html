@@ -3,40 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f1117">
+    <meta name="description" content="تتبع رحلة التعلم في علم البيانات والذكاء الاصطناعي">
     <title>رحلة التعلم</title>
     <link rel="stylesheet" href="style.css">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
 </head>
 <body>
-
     <!-- Setup Screen -->
-    <div id="setup-screen" class="setup-screen" style="display:none">
+    <div id="setup-screen" class="setup-screen">
         <div class="setup-card">
             <h1>🎯 إعداد رحلة التعلم</h1>
-            <p>لحفظ بياناتك والوصول إليها من أي مكان، اربط التطبيق بحسابك على GitHub</p>
+            <p>لحفظ بياناتك والوصول إليها من أي مكان، نحتاج ربط التطبيق بحسابك على GitHub</p>
+
             <div class="setup-steps">
                 <div class="setup-step">
                     <h3>الخطوة 1: إنشاء GitHub Token</h3>
                     <ol>
                         <li>اذهب إلى <a href="https://github.com/settings/tokens/new" target="_blank">GitHub Token Settings</a></li>
                         <li>اكتب اسم: <code>learning-journey</code></li>
-                        <li>في Expiration اختر: <code>No expiration</code></li>
-                        <li>فعّل صلاحية: <code>repo</code> (كامل)</li>
-                        <li>اضغط <strong>Generate token</strong> وانسخه</li>
+                        <li>اختر صلاحية: <code>repo</code> (كامل)</li>
+                        <li>اضغط <strong>Generate token</strong></li>
+                        <li>انسخ الـ Token</li>
                     </ol>
                 </div>
+
                 <div class="setup-step">
                     <h3>الخطوة 2: أدخل البيانات</h3>
                     <div class="setup-form">
                         <label>GitHub Username</label>
-                        <input type="text" id="setup-username" placeholder="مثال: abdrhmnr">
+                        <input type="text" id="setup-username" placeholder="مثال: ahmed123" autocomplete="username">
+
                         <label>اسم الـ Repository</label>
-                        <input type="text" id="setup-repo" value="learning-journey">
+                        <input type="text" id="setup-repo" placeholder="مثال: learning-journey" value="learning-journey">
+
                         <label>GitHub Token</label>
-                        <input type="password" id="setup-token" placeholder="ghp_xxxxxxxxxxxx">
+                        <input type="password" id="setup-token" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off">
+
                         <button class="btn btn-primary" onclick="saveSetup()" style="width:100%;margin-top:1rem;padding:0.75rem">
                             🚀 بدء الرحلة
                         </button>
-                        <button class="btn btn-ghost" onclick="skipSetup()" style="width:100%;margin-top:0.5rem">
+
+                        <button class="btn btn-ghost" onclick="skipSetup()" style="width:100%;margin-top:0.5rem;padding:0.75rem">
                             تخطي (حفظ محلي فقط)
                         </button>
                     </div>
@@ -50,22 +61,36 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <h1 class="logo">🎯 رحلتي</h1>
-                <button class="sidebar-close" onclick="toggleSidebar()">✕</button>
+                <button class="sidebar-close" onclick="toggleSidebar()" aria-label="إغلاق القائمة">✕</button>
             </div>
             <nav class="sidebar-nav" id="sidebar-nav">
-                <button class="nav-item active" onclick="navigate('dashboard',this)">
+                <button class="nav-item active" data-section="dashboard" onclick="navigate('dashboard',this)">
                     <span class="nav-icon">📊</span><span>لوحة التحكم</span>
                 </button>
+
                 <div class="nav-divider">خطط التعلم</div>
                 <div id="plans-nav"></div>
                 <button class="nav-item add-nav" onclick="addNewPlan()">
                     <span class="nav-icon">➕</span><span>خطة جديدة</span>
                 </button>
+
                 <div class="nav-divider">المشاريع</div>
                 <div id="projects-nav"></div>
                 <button class="nav-item add-nav" onclick="addNewProject()">
                     <span class="nav-icon">➕</span><span>مشروع جديد</span>
                 </button>
+
+                <div class="nav-divider">أدوات</div>
+                <button class="nav-item" onclick="navigate('pomodoro',this)">
+                    <span class="nav-icon">🍅</span><span>بومودورو</span>
+                </button>
+                <button class="nav-item" onclick="navigate('achievements',this)">
+                    <span class="nav-icon">🏆</span><span>الإنجازات</span>
+                </button>
+                <button class="nav-item" onclick="navigate('stats',this)">
+                    <span class="nav-icon">📈</span><span>الإحصائيات</span>
+                </button>
+
                 <div class="nav-divider">أخرى</div>
                 <button class="nav-item" onclick="navigate('calendar',this)">
                     <span class="nav-icon">📅</span><span>التقويم</span>
@@ -78,26 +103,43 @@
                 </button>
             </nav>
             <div class="sidebar-footer">
-                <span class="sync-status" id="sync-status">● محلي</span>
-                <button class="btn-icon" onclick="forceSyncNow()" title="مزامنة">🔄</button>
+                <div class="sync-status" id="sync-status">● محلي</div>
+                <button class="btn-icon" onclick="forceSyncNow()" title="مزامنة الآن">🔄</button>
                 <button class="btn-icon" onclick="exportData()" title="تصدير">💾</button>
                 <button class="btn-icon" onclick="importData()" title="استيراد">📥</button>
-                <button class="btn-icon" onclick="toggleTheme()" title="المظهر">🌙</button>
-                <button class="btn-icon" onclick="openSettings()" title="إعدادات">⚙️</button>
+                <button class="btn-icon" onclick="toggleTheme()" title="المظهر" id="theme-toggle-btn">🌙</button>
+                <button class="btn-icon" onclick="openSettings()" title="الإعدادات">⚙️</button>
             </div>
         </aside>
+
         <main class="main">
             <header class="topbar">
-                <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+                <button class="menu-btn" onclick="toggleSidebar()" aria-label="القائمة">☰</button>
                 <div class="topbar-info">
                     <span id="current-date"></span>
-                    <span class="streak-badge" id="streak-badge">🔥 0</span>
+                    <span class="streak-badge" id="streak-badge"></span>
                 </div>
                 <div class="topbar-search">
-                    <input type="text" placeholder="بحث..." id="search-input" oninput="handleSearch(this.value)">
+                    <input type="text" placeholder="بحث... (Ctrl+K)" id="search-input"
+                           oninput="handleSearch(this.value)" autocomplete="off">
                 </div>
             </header>
-            <div class="content" id="content"></div>
+            <div class="content" id="content">
+                <!-- Loading skeleton -->
+                <div id="loading-skeleton">
+                    <div class="skeleton skeleton-text" style="width:200px;height:24px;margin-bottom:1.5rem"></div>
+                    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem">
+                        <div class="skeleton skeleton-card"></div>
+                        <div class="skeleton skeleton-card"></div>
+                        <div class="skeleton skeleton-card"></div>
+                        <div class="skeleton skeleton-card"></div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+                        <div class="skeleton skeleton-card" style="height:200px"></div>
+                        <div class="skeleton skeleton-card" style="height:200px"></div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 
@@ -106,7 +148,7 @@
         <div class="modal" onclick="event.stopPropagation()">
             <div class="modal-header">
                 <h2 id="modal-title"></h2>
-                <button class="modal-close" onclick="closeModal()">✕</button>
+                <button class="modal-close" onclick="closeModal()" aria-label="إغلاق">✕</button>
             </div>
             <div class="modal-body" id="modal-body"></div>
         </div>
@@ -116,5 +158,14 @@
 
     <script src="sync.js"></script>
     <script src="app.js"></script>
+
+    <!-- Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log('✅ Service Worker registered'))
+                .catch(err => console.log('SW registration failed:', err));
+        }
+    </script>
 </body>
 </html>
