@@ -15,35 +15,45 @@
               "name": "Python المتقدم - OOP",
               "status": "done",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t2",
               "name": "Decorators & Generators",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t3",
               "name": "File I/O - PyMuPDF, pandas, openpyxl",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t4",
               "name": "SQL المتقدم - Window Functions",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t5",
               "name": "Statistics - Probability & Hypothesis Testing",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             }
           ]
         },
@@ -57,35 +67,45 @@
               "name": "Scikit-learn أساسيات",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t7",
               "name": "Linear & Logistic Regression",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t8",
               "name": "Decision Trees & Random Forest",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t9",
               "name": "Cross Validation & Tuning",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t10",
               "name": "Feature Engineering",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             }
           ]
         },
@@ -99,28 +119,36 @@
               "name": "Git & GitHub",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t12",
               "name": "Docker & Docker Compose",
               "status": "done",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t13",
               "name": "Flask API",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t14",
               "name": "🎯 مشروع ML + API + Docker",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             }
           ]
         }
@@ -141,42 +169,54 @@
               "name": "PyTorch أساسيات",
               "status": "done",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t16",
               "name": "Neural Networks",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t17",
               "name": "CNNs & Transfer Learning",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t18",
               "name": "RNN & LSTM",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t19",
               "name": "NLP & Transformers",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t20",
               "name": "Hugging Face",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             }
           ]
         },
@@ -190,56 +230,72 @@
               "name": "RAG Architecture",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t22",
               "name": "Embeddings & sentence-transformers",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t23",
               "name": "Vector DB - Chroma",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t24",
               "name": "LangChain / LlamaIndex",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t25",
               "name": "Ollama - LLM محلي",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t26",
               "name": "OCR - Tesseract + OpenCV",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t27",
               "name": "Streamlit واجهة",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t28",
               "name": "🎯 تجميع مشروع RAG كامل",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             }
           ]
         }
@@ -260,35 +316,45 @@
               "name": "PySpark - DataFrames & SQL",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t30",
               "name": "ETL Concepts",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t31",
               "name": "Apache Airflow",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t32",
               "name": "PostgreSQL",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t33",
               "name": "🎯 مشروع ETL Pipeline",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             }
           ]
         },
@@ -302,21 +368,27 @@
               "name": "Kafka Architecture",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t35",
               "name": "Producers & Consumers",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t36",
               "name": "Spark Streaming + Kafka",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             }
           ]
         }
@@ -337,35 +409,45 @@
               "name": "Research Methodology",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t38",
               "name": "LaTeX & Overleaf",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t39",
               "name": "قراءة: Survey on Concept Drift (Gama 2014)",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t40",
               "name": "Time Series Analysis",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t41",
               "name": "River Library - ADWIN, DDM",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             }
           ]
         },
@@ -379,28 +461,36 @@
               "name": "قراءة: ADWIN Algorithm (Bifet 2007)",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t43",
               "name": "قراءة: Learning under Concept Drift",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t44",
               "name": "Online Learning Algorithms",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t45",
               "name": "🎯 مشروع Data Drift Detection System",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             }
           ]
         },
@@ -414,35 +504,45 @@
               "name": "قراءة 4-6 أوراق بحثية إضافية",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t47",
               "name": "كتابة Literature Review",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t48",
               "name": "تحديد Research Gap",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t49",
               "name": "كتابة Research Proposal",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             },
             {
               "id": "t50",
               "name": "تقديم رسمي للماستر",
               "status": "pending",
               "date": "",
-              "subs": []
+              "subs": [],
+              "notes": "",
+              "tags": []
             }
           ]
         }
@@ -648,5 +748,22 @@
   "journalEntries": [],
   "streak": 1,
   "lastActive": "2026-03-28",
-  "theme": "light"
+  "theme": "light",
+  "achievements": [
+    "first_step"
+  ],
+  "lastModified": "2026-03-28T15:10:13.822Z",
+  "pomodoroLog": {},
+  "weeklyGoals": null,
+  "tags": [
+    "سهل",
+    "متوسط",
+    "صعب",
+    "مهم",
+    "مراجعة"
+  ],
+  "_nightActivity": false,
+  "_earlyActivity": false,
+  "lastSync": "2026-03-28T15:11:54.038Z",
+  "syncDevice": "desktop_q2wn"
 }
