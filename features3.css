@@ -1,0 +1,759 @@
+/* ==============================================
+   🆕 FEATURES v3.3
+   XP System + Habits + Kanban + Countdown +
+   Templates + Charts + Sticky Notes + PDF +
+   Weekly Compare
+   ============================================== */
+
+/* ==========================================
+   🎮 G - XP & LEVELING SYSTEM
+   ========================================== */
+
+.xp-bar-container {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.xp-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    background: var(--primary-bg);
+    border: 3px solid var(--primary);
+    flex-shrink: 0;
+}
+
+.xp-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.xp-level-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.3rem;
+}
+
+.xp-level-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.xp-level-num {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.xp-progress-bar {
+    width: 100%;
+    height: 10px;
+    background: var(--border-light);
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+.xp-progress-fill {
+    height: 100%;
+    border-radius: 5px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    transition: width 0.8s ease;
+    position: relative;
+}
+
+.xp-progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    animation: xpShine 2s infinite;
+}
+
+@keyframes xpShine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.xp-text {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    margin-top: 0.2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.xp-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 500;
+    text-align: center;
+    animation: xpPopup 2s ease forwards;
+    pointer-events: none;
+}
+
+.xp-popup-text {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--warning);
+    text-shadow: 0 0 20px rgba(217, 119, 6, 0.5);
+}
+
+.xp-popup-sub {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-top: 0.3rem;
+}
+
+@keyframes xpPopup {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    20% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    40% { transform: translate(-50%, -50%) scale(1); }
+    80% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -70%) scale(0.8); }
+}
+
+/* ==========================================
+   ✅ B - HABIT TRACKER
+   ========================================== */
+
+.habits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.habit-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    transition: var(--transition);
+}
+
+.habit-card:hover {
+    box-shadow: var(--shadow);
+}
+
+.habit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.habit-name {
+    font-size: 0.92rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.habit-streak {
+    font-size: 0.72rem;
+    color: var(--warning);
+    font-weight: 600;
+}
+
+.habit-week {
+    display: flex;
+    gap: 0.3rem;
+    justify-content: space-between;
+}
+
+.habit-day {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    cursor: pointer;
+    transition: var(--transition);
+    flex-direction: column;
+    gap: 0;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.habit-day:hover {
+    border-color: var(--primary);
+    background: var(--primary-bg);
+}
+
+.habit-day.checked {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+}
+
+.habit-day.today {
+    border-color: var(--primary);
+    border-width: 3px;
+}
+
+.habit-day-label {
+    font-size: 0.55rem;
+    line-height: 1;
+}
+
+.habit-day-check {
+    font-size: 0.7rem;
+    line-height: 1;
+}
+
+.habit-mini-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+}
+
+/* ==========================================
+   ⏰ F - COUNTDOWN TIMER
+   ========================================== */
+
+.countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.75rem;
+}
+
+.countdown-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.countdown-card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.countdown-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.countdown-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.countdown-date {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.countdown-numbers {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.countdown-unit {
+    text-align: center;
+}
+
+.countdown-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+}
+
+.countdown-label {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+.countdown-card.expired {
+    border-color: var(--success);
+    background: var(--success-light);
+}
+
+.countdown-card.expired .countdown-value {
+    color: var(--success);
+}
+
+.countdown-card.urgent {
+    border-color: var(--danger);
+}
+
+.countdown-card.urgent .countdown-value {
+    color: var(--danger);
+}
+
+/* ==========================================
+   📌 E - STICKY NOTES
+   ========================================== */
+
+.sticky-notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.sticky-note {
+    padding: 1rem;
+    border-radius: var(--radius);
+    min-height: 120px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    position: relative;
+    cursor: pointer;
+    transition: var(--transition);
+    word-break: break-word;
+    box-shadow: var(--shadow-sm);
+}
+
+.sticky-note:hover {
+    transform: translateY(-3px) rotate(-1deg);
+    box-shadow: var(--shadow-md);
+}
+
+.sticky-note.yellow {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.sticky-note.blue {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.sticky-note.green {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.sticky-note.pink {
+    background: #fce7f3;
+    color: #9d174d;
+}
+
+.sticky-note.purple {
+    background: #ede9fe;
+    color: #5b21b6;
+}
+
+[data-theme="dark"] .sticky-note.yellow {
+    background: rgba(254, 243, 199, 0.15);
+    color: #fbbf24;
+}
+
+[data-theme="dark"] .sticky-note.blue {
+    background: rgba(219, 234, 254, 0.1);
+    color: #60a5fa;
+}
+
+[data-theme="dark"] .sticky-note.green {
+    background: rgba(209, 250, 229, 0.1);
+    color: #34d399;
+}
+
+[data-theme="dark"] .sticky-note.pink {
+    background: rgba(252, 231, 243, 0.1);
+    color: #f472b6;
+}
+
+[data-theme="dark"] .sticky-note.purple {
+    background: rgba(237, 233, 254, 0.1);
+    color: #a78bfa;
+}
+
+.sticky-note-delete {
+    position: absolute;
+    top: 0.3rem;
+    left: 0.3rem;
+    width: 22px;
+    height: 22px;
+    border: none;
+    background: rgba(0,0,0,0.1);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.7rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.sticky-note:hover .sticky-note-delete {
+    display: flex;
+}
+
+.sticky-note-add {
+    border: 2px dashed var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    min-height: 120px;
+    border-radius: var(--radius);
+    transition: var(--transition);
+}
+
+.sticky-note-add:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--primary-bg);
+}
+
+/* ==========================================
+   📊 C - ADVANCED CHARTS (Pie + Radar)
+   ========================================== */
+
+.chart-canvas-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+}
+
+.pie-chart-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.pie-chart-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.pie-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 0.75rem;
+}
+
+.pie-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.78rem;
+}
+
+.pie-legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* Radar / Spider chart */
+.radar-chart-container {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+/* ==========================================
+   📋 I - PLAN TEMPLATES
+   ========================================== */
+
+.templates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.75rem;
+}
+
+.template-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.template-card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.template-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.template-name {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.template-desc {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+.template-meta {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+}
+
+/* ==========================================
+   📊 J - WEEKLY COMPARE
+   ========================================== */
+
+.compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.compare-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    text-align: center;
+}
+
+.compare-card.current {
+    border-color: var(--primary);
+}
+
+.compare-label {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.compare-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.compare-diff {
+    font-size: 0.78rem;
+    margin-top: 0.25rem;
+    font-weight: 600;
+}
+
+.compare-diff.positive {
+    color: var(--success);
+}
+
+.compare-diff.negative {
+    color: var(--danger);
+}
+
+.compare-diff.neutral {
+    color: var(--text-secondary);
+}
+
+/* ==========================================
+   📄 H - PDF PRINT STYLES
+   ========================================== */
+
+.pdf-preview {
+    background: white;
+    color: #1f2937;
+    padding: 2rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.pdf-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #4f46e5;
+}
+
+.pdf-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #4f46e5;
+}
+
+.pdf-date {
+    font-size: 0.82rem;
+    color: #6b7280;
+    margin-top: 0.3rem;
+}
+
+.pdf-section {
+    margin-bottom: 1.5rem;
+}
+
+.pdf-section h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #4f46e5;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* ==========================================
+   🗂️ A - KANBAN BOARD
+   ========================================== */
+
+.kanban-container {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    padding: 0.5rem 0;
+    -webkit-overflow-scrolling: touch;
+    min-height: 400px;
+}
+
+.kanban-column {
+    min-width: 260px;
+    max-width: 300px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.kanban-col-header {
+    padding: 0.75rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kanban-col-count {
+    font-size: 0.72rem;
+    background: var(--bg-card);
+    padding: 0.1rem 0.45rem;
+    border-radius: 10px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.kanban-col-body {
+    flex: 1;
+    padding: 0.5rem;
+    overflow-y: auto;
+    min-height: 100px;
+}
+
+.kanban-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    padding: 0.65rem;
+    margin-bottom: 0.4rem;
+    cursor: grab;
+    transition: var(--transition);
+    font-size: 0.85rem;
+}
+
+.kanban-card:hover {
+    box-shadow: var(--shadow);
+    border-color: var(--primary);
+}
+
+.kanban-card:active {
+    cursor: grabbing;
+}
+
+.kanban-card.dragging {
+    opacity: 0.4;
+}
+
+.kanban-card-title {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.kanban-card-meta {
+    display: flex;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+}
+
+.kanban-drop-zone {
+    min-height: 40px;
+    border: 2px dashed transparent;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.kanban-drop-zone.drag-over {
+    border-color: var(--primary);
+    background: var(--primary-bg);
+}
+
+@media (max-width: 768px) {
+    .kanban-column {
+        min-width: 230px;
+    }
+
+    .habits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .countdown-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .compare-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sticky-notes-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .habit-day {
+        width: 28px;
+        height: 28px;
+    }
+}

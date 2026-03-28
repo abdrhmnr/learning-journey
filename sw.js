@@ -13,7 +13,9 @@ const ASSETS = [
     './features.js',   // ✨ جديد
     './features.css' ,   // ✨ جديد
     './features2.js',    // ✨ جديد
-    './features2.css'
+    './features2.css',
+    './features3.js',    // ✨ جديد
+    './features3.css'
 
 ];
 
