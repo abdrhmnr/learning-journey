@@ -9,7 +9,12 @@ const ASSETS = [
     './index.html',
     './style.css',
     './app.js',
-    './sync.js'
+    './sync.js',
+    './features.js',   // ✨ جديد
+    './features.css' ,   // ✨ جديد
+    './features2.js',    // ✨ جديد
+    './features2.css'
+
 ];
 
 // Install: Cache all assets
