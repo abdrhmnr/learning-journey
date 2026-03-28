@@ -5,56 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>رحلة التعلم</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">
 </head>
 <body>
-    <div id="app">
-        <!-- Sidebar -->
+    <!-- Setup Screen -->
+    <div id="setup-screen" class="setup-screen">
+        <div class="setup-card">
+            <h1>🎯 إعداد رحلة التعلم</h1>
+            <p>لحفظ بياناتك والوصول إليها من أي مكان، نحتاج ربط التطبيق بحسابك على GitHub</p>
+
+            <div class="setup-steps">
+                <div class="setup-step">
+                    <h3>الخطوة 1: إنشاء GitHub Token</h3>
+                    <ol>
+                        <li>اذهب إلى <a href="https://github.com/settings/tokens/new" target="_blank">GitHub Token Settings</a></li>
+                        <li>اكتب اسم: <code>learning-journey</code></li>
+                        <li>اختر صلاحية: <code>repo</code> (كامل)</li>
+                        <li>اضغط <strong>Generate token</strong></li>
+                        <li>انسخ الـ Token</li>
+                    </ol>
+                </div>
+
+                <div class="setup-step">
+                    <h3>الخطوة 2: أدخل البيانات</h3>
+                    <div class="setup-form">
+                        <label>GitHub Username</label>
+                        <input type="text" id="setup-username" placeholder="مثال: ahmed123">
+
+                        <label>اسم الـ Repository</label>
+                        <input type="text" id="setup-repo" placeholder="مثال: learning-journey" value="learning-journey">
+
+                        <label>GitHub Token</label>
+                        <input type="password" id="setup-token" placeholder="ghp_xxxxxxxxxxxx">
+
+                        <button class="btn btn-primary" onclick="saveSetup()" style="width:100%;margin-top:1rem;padding:0.75rem">
+                            🚀 بدء الرحلة
+                        </button>
+
+                        <button class="btn btn-ghost" onclick="skipSetup()" style="width:100%;margin-top:0.5rem;padding:0.75rem">
+                            تخطي (حفظ محلي فقط)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" style="display:none">
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <h1 class="logo">🎯 رحلتي</h1>
                 <button class="sidebar-close" onclick="toggleSidebar()">✕</button>
             </div>
             <nav class="sidebar-nav" id="sidebar-nav">
-                <button class="nav-item active" data-section="dashboard" onclick="navigate('dashboard', this)">
-                    <span class="nav-icon">📊</span>
-                    <span>لوحة التحكم</span>
+                <button class="nav-item active" data-section="dashboard" onclick="navigate('dashboard',this)">
+                    <span class="nav-icon">📊</span><span>لوحة التحكم</span>
                 </button>
                 <div class="nav-divider">خطط التعلم</div>
                 <div id="plans-nav"></div>
                 <button class="nav-item add-nav" onclick="addNewPlan()">
-                    <span class="nav-icon">➕</span>
-                    <span>خطة جديدة</span>
+                    <span class="nav-icon">➕</span><span>خطة جديدة</span>
                 </button>
                 <div class="nav-divider">المشاريع</div>
                 <div id="projects-nav"></div>
                 <button class="nav-item add-nav" onclick="addNewProject()">
-                    <span class="nav-icon">➕</span>
-                    <span>مشروع جديد</span>
+                    <span class="nav-icon">➕</span><span>مشروع جديد</span>
                 </button>
                 <div class="nav-divider">أخرى</div>
-                <button class="nav-item" data-section="calendar" onclick="navigate('calendar', this)">
-                    <span class="nav-icon">📅</span>
-                    <span>التقويم</span>
+                <button class="nav-item" onclick="navigate('calendar',this)">
+                    <span class="nav-icon">📅</span><span>التقويم</span>
                 </button>
-                <button class="nav-item" data-section="resources" onclick="navigate('resources', this)">
-                    <span class="nav-icon">📖</span>
-                    <span>المصادر</span>
+                <button class="nav-item" onclick="navigate('resources',this)">
+                    <span class="nav-icon">📖</span><span>المصادر</span>
                 </button>
-                <button class="nav-item" data-section="journal" onclick="navigate('journal', this)">
-                    <span class="nav-icon">📝</span>
-                    <span>اليوميات</span>
+                <button class="nav-item" onclick="navigate('journal',this)">
+                    <span class="nav-icon">📝</span><span>اليوميات</span>
                 </button>
             </nav>
             <div class="sidebar-footer">
+                <div class="sync-status" id="sync-status">●</div>
+                <button class="btn-icon" onclick="forceSyncNow()" title="مزامنة الآن">🔄</button>
                 <button class="btn-icon" onclick="exportData()" title="تصدير">💾</button>
                 <button class="btn-icon" onclick="importData()" title="استيراد">📥</button>
                 <button class="btn-icon" onclick="toggleTheme()" title="المظهر">🌙</button>
+                <button class="btn-icon" onclick="openSettings()" title="الإعدادات">⚙️</button>
             </div>
         </aside>
 
-        <!-- Main Content -->
-        <main class="main" id="main">
+        <main class="main">
             <header class="topbar">
                 <button class="menu-btn" onclick="toggleSidebar()">☰</button>
                 <div class="topbar-info">
@@ -65,9 +103,7 @@
                     <input type="text" placeholder="بحث..." id="search-input" oninput="handleSearch(this.value)">
                 </div>
             </header>
-            <div class="content" id="content">
-                <!-- Dynamic content rendered here -->
-            </div>
+            <div class="content" id="content"></div>
         </main>
     </div>
 
@@ -82,9 +118,9 @@
         </div>
     </div>
 
-    <!-- Toast -->
     <div id="toast-container"></div>
 
+    <script src="sync.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

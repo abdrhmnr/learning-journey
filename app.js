@@ -53,31 +53,23 @@ const DEFAULT = {
             icon: '🤖',
             groups: [
                 {
-                    id: 'g4',
-                    name: 'الشهر 4: Deep Learning',
-                    collapsed: true,
+                    id: 'g4', name: 'الشهر 4: Deep Learning', collapsed: true,
                     tasks: [
                         { id: 't15', name: 'PyTorch أساسيات', status: 'pending', date: '', subs: [] },
                         { id: 't16', name: 'Neural Networks', status: 'pending', date: '', subs: [] },
                         { id: 't17', name: 'CNNs & Transfer Learning', status: 'pending', date: '', subs: [] },
                         { id: 't18', name: 'RNN & LSTM', status: 'pending', date: '', subs: [] },
-                        { id: 't19', name: 'NLP & Transformers', status: 'pending', date: '', subs: [] },
-                        { id: 't20', name: 'Hugging Face', status: 'pending', date: '', subs: [] },
+                        { id: 't19', name: 'NLP & Transformers & Hugging Face', status: 'pending', date: '', subs: [] },
                     ]
                 },
                 {
-                    id: 'g5',
-                    name: 'الشهر 5: مشروع Mini RAG 🎯',
-                    collapsed: true,
+                    id: 'g5', name: 'الشهر 5: مشروع Mini RAG 🎯', collapsed: true,
                     tasks: [
-                        { id: 't21', name: 'RAG Architecture', status: 'pending', date: '', subs: [] },
-                        { id: 't22', name: 'Embeddings & sentence-transformers', status: 'pending', date: '', subs: [] },
-                        { id: 't23', name: 'Vector DB - Chroma', status: 'pending', date: '', subs: [] },
-                        { id: 't24', name: 'LangChain / LlamaIndex', status: 'pending', date: '', subs: [] },
-                        { id: 't25', name: 'Ollama - LLM محلي', status: 'pending', date: '', subs: [] },
-                        { id: 't26', name: 'OCR - Tesseract + OpenCV', status: 'pending', date: '', subs: [] },
-                        { id: 't27', name: 'Streamlit واجهة', status: 'pending', date: '', subs: [] },
-                        { id: 't28', name: '🎯 تجميع مشروع RAG كامل', status: 'pending', date: '', subs: [] },
+                        { id: 't20', name: 'RAG Architecture + Embeddings', status: 'pending', date: '', subs: [] },
+                        { id: 't21', name: 'Vector DB (Chroma) + Chunking', status: 'pending', date: '', subs: [] },
+                        { id: 't22', name: 'LangChain + Ollama', status: 'pending', date: '', subs: [] },
+                        { id: 't23', name: 'OCR - Tesseract', status: 'pending', date: '', subs: [] },
+                        { id: 't24', name: 'Streamlit + Docker', status: 'pending', date: '', subs: [] },
                     ]
                 }
             ]
@@ -88,25 +80,18 @@ const DEFAULT = {
             icon: '🔧',
             groups: [
                 {
-                    id: 'g6',
-                    name: 'الشهر 6: PySpark + ETL',
-                    collapsed: true,
+                    id: 'g6', name: 'الشهر 6: PySpark + ETL', collapsed: true,
                     tasks: [
-                        { id: 't29', name: 'PySpark - DataFrames & SQL', status: 'pending', date: '', subs: [] },
-                        { id: 't30', name: 'ETL Concepts', status: 'pending', date: '', subs: [] },
-                        { id: 't31', name: 'Apache Airflow', status: 'pending', date: '', subs: [] },
-                        { id: 't32', name: 'PostgreSQL', status: 'pending', date: '', subs: [] },
-                        { id: 't33', name: '🎯 مشروع ETL Pipeline', status: 'pending', date: '', subs: [] },
+                        { id: 't25', name: 'PySpark DataFrames & SQL', status: 'pending', date: '', subs: [] },
+                        { id: 't26', name: 'ETL + Airflow', status: 'pending', date: '', subs: [] },
+                        { id: 't27', name: 'PostgreSQL', status: 'pending', date: '', subs: [] },
                     ]
                 },
                 {
-                    id: 'g7',
-                    name: 'الشهر 8: Kafka Streaming',
-                    collapsed: true,
+                    id: 'g7', name: 'Kafka Streaming', collapsed: true,
                     tasks: [
-                        { id: 't34', name: 'Kafka Architecture', status: 'pending', date: '', subs: [] },
-                        { id: 't35', name: 'Producers & Consumers', status: 'pending', date: '', subs: [] },
-                        { id: 't36', name: 'Spark Streaming + Kafka', status: 'pending', date: '', subs: [] },
+                        { id: 't28', name: 'Kafka Architecture', status: 'pending', date: '', subs: [] },
+                        { id: 't29', name: 'Spark Streaming + Kafka', status: 'pending', date: '', subs: [] },
                     ]
                 }
             ]
@@ -117,38 +102,27 @@ const DEFAULT = {
             icon: '🎓',
             groups: [
                 {
-                    id: 'g8',
-                    name: 'الشهر 7: الأساسيات البحثية',
-                    collapsed: true,
+                    id: 'g8', name: 'الأساسيات البحثية', collapsed: true,
                     tasks: [
-                        { id: 't37', name: 'Research Methodology', status: 'pending', date: '', subs: [] },
-                        { id: 't38', name: 'LaTeX & Overleaf', status: 'pending', date: '', subs: [] },
-                        { id: 't39', name: 'قراءة: Survey on Concept Drift (Gama 2014)', status: 'pending', date: '', subs: [] },
-                        { id: 't40', name: 'Time Series Analysis', status: 'pending', date: '', subs: [] },
-                        { id: 't41', name: 'River Library - ADWIN, DDM', status: 'pending', date: '', subs: [] },
+                        { id: 't30', name: 'Research Methodology + LaTeX', status: 'pending', date: '', subs: [] },
+                        { id: 't31', name: 'قراءة: Survey on Concept Drift', status: 'pending', date: '', subs: [] },
+                        { id: 't32', name: 'River Library - ADWIN, DDM', status: 'pending', date: '', subs: [] },
                     ]
                 },
                 {
-                    id: 'g9',
-                    name: 'الشهر 8-9: التعمق + المشروع',
-                    collapsed: true,
+                    id: 'g9', name: 'التعمق + المشروع', collapsed: true,
                     tasks: [
-                        { id: 't42', name: 'قراءة: ADWIN Algorithm (Bifet 2007)', status: 'pending', date: '', subs: [] },
-                        { id: 't43', name: 'قراءة: Learning under Concept Drift', status: 'pending', date: '', subs: [] },
-                        { id: 't44', name: 'Online Learning Algorithms', status: 'pending', date: '', subs: [] },
-                        { id: 't45', name: '🎯 مشروع Data Drift Detection System', status: 'pending', date: '', subs: [] },
+                        { id: 't33', name: 'قراءة الأوراق البحثية الأساسية', status: 'pending', date: '', subs: [] },
+                        { id: 't34', name: 'Online Learning Algorithms', status: 'pending', date: '', subs: [] },
+                        { id: 't35', name: '🎯 مشروع Data Drift System', status: 'pending', date: '', subs: [] },
                     ]
                 },
                 {
-                    id: 'g10',
-                    name: 'الشهر 10-12: البحث والكتابة',
-                    collapsed: true,
+                    id: 'g10', name: 'البحث والكتابة', collapsed: true,
                     tasks: [
-                        { id: 't46', name: 'قراءة 4-6 أوراق بحثية إضافية', status: 'pending', date: '', subs: [] },
-                        { id: 't47', name: 'كتابة Literature Review', status: 'pending', date: '', subs: [] },
-                        { id: 't48', name: 'تحديد Research Gap', status: 'pending', date: '', subs: [] },
-                        { id: 't49', name: 'كتابة Research Proposal', status: 'pending', date: '', subs: [] },
-                        { id: 't50', name: 'تقديم رسمي للماستر', status: 'pending', date: '', subs: [] },
+                        { id: 't36', name: 'Literature Review', status: 'pending', date: '', subs: [] },
+                        { id: 't37', name: 'Research Proposal', status: 'pending', date: '', subs: [] },
+                        { id: 't38', name: 'تقديم رسمي للماستر', status: 'pending', date: '', subs: [] },
                     ]
                 }
             ]
@@ -156,67 +130,54 @@ const DEFAULT = {
     ],
     projects: [
         {
-            id: 'proj_1',
-            name: 'ML Pipeline متكامل',
-            icon: '🔬',
+            id: 'proj_1', name: 'ML Pipeline متكامل', icon: '🔬',
             phases: [
                 { id: 'p1', name: 'جمع وتنظيف البيانات', status: 'pending' },
                 { id: 'p2', name: 'EDA + Feature Engineering', status: 'pending' },
-                { id: 'p3', name: 'بناء وتدريب النموذج', status: 'pending' },
-                { id: 'p4', name: 'Flask API', status: 'pending' },
-                { id: 'p5', name: 'Docker + GitHub', status: 'pending' },
+                { id: 'p3', name: 'بناء النموذج + Flask API', status: 'pending' },
+                { id: 'p4', name: 'Docker + GitHub', status: 'pending' },
             ]
         },
         {
-            id: 'proj_2',
-            name: 'Mini RAG System',
-            icon: '🤖',
+            id: 'proj_2', name: 'Mini RAG System', icon: '🤖',
             phases: [
-                { id: 'p6', name: 'Document Loader + Chunking', status: 'pending' },
-                { id: 'p7', name: 'Embedding Pipeline', status: 'pending' },
-                { id: 'p8', name: 'Vector Store + Retrieval', status: 'pending' },
-                { id: 'p9', name: 'OCR للعربي', status: 'pending' },
-                { id: 'p10', name: 'Streamlit UI', status: 'pending' },
-                { id: 'p11', name: 'Docker + Docs', status: 'pending' },
+                { id: 'p5', name: 'Document Loader + Chunking', status: 'pending' },
+                { id: 'p6', name: 'Embedding + Vector Store', status: 'pending' },
+                { id: 'p7', name: 'OCR + Streamlit UI', status: 'pending' },
+                { id: 'p8', name: 'Docker + Docs', status: 'pending' },
             ]
         },
         {
-            id: 'proj_3',
-            name: 'Data Drift Detection System',
-            icon: '📊',
+            id: 'proj_3', name: 'Data Drift Detection', icon: '📊',
             phases: [
-                { id: 'p12', name: 'Architecture Design', status: 'pending' },
-                { id: 'p13', name: 'Drift Detection Module', status: 'pending' },
-                { id: 'p14', name: 'Adaptive Model Updater', status: 'pending' },
-                { id: 'p15', name: 'Dashboard + API', status: 'pending' },
-                { id: 'p16', name: 'Docker Compose Deploy', status: 'pending' },
+                { id: 'p9', name: 'Architecture Design', status: 'pending' },
+                { id: 'p10', name: 'Drift Detection Module', status: 'pending' },
+                { id: 'p11', name: 'Dashboard + API', status: 'pending' },
+                { id: 'p12', name: 'Docker Deploy', status: 'pending' },
             ]
         }
     ],
     resources: [
         {
-            id: 'res_1',
-            name: 'Stanford LLM Lectures',
+            id: 'res_1', name: 'Stanford LLM Lectures',
             items: [
                 { id: 'r1', text: 'Lecture 1 - Transformer', url: 'https://lnkd.in/dGnQW39t', done: false },
                 { id: 'r2', text: 'Lecture 2 - Transformer Models', url: 'https://lnkd.in/dT_VEpVH', done: false },
                 { id: 'r3', text: 'Lecture 3 - LLMs', url: 'https://lnkd.in/dwjjpjaP', done: false },
-                { id: 'r4', text: 'Lecture 4 - LLM Training', url: 'https://lnkd.in/dSi_xCEN', done: false },
-                { id: 'r5', text: 'Lecture 5 - LLM Tuning', url: 'https://lnkd.in/dUK5djpB', done: false },
-                { id: 'r6', text: 'Lecture 6 - LLM Reasoning', url: 'https://lnkd.in/dAGQTNAM', done: false },
-                { id: 'r7', text: 'Lecture 7 - Agentic LLMs', url: 'https://lnkd.in/dWD4j7vm', done: false },
+                { id: 'r4', text: 'Lecture 4 - Training', url: 'https://lnkd.in/dSi_xCEN', done: false },
+                { id: 'r5', text: 'Lecture 5 - Tuning', url: 'https://lnkd.in/dUK5djpB', done: false },
+                { id: 'r6', text: 'Lecture 6 - Reasoning', url: 'https://lnkd.in/dAGQTNAM', done: false },
+                { id: 'r7', text: 'Lecture 7 - Agentic', url: 'https://lnkd.in/dWD4j7vm', done: false },
                 { id: 'r8', text: 'Lecture 8 - Evaluation', url: 'https://lnkd.in/ddxE5zvb', done: false },
-                { id: 'r9', text: 'Lecture 9 - Current Trends', url: 'https://lnkd.in/dGsTd8jN', done: false },
+                { id: 'r9', text: 'Lecture 9 - Trends', url: 'https://lnkd.in/dGsTd8jN', done: false },
             ]
         },
         {
-            id: 'res_2',
-            name: 'أوراق بحثية',
+            id: 'res_2', name: 'أوراق بحثية',
             items: [
                 { id: 'r10', text: 'Survey on Concept Drift (Gama 2014)', url: '', done: false },
                 { id: 'r11', text: 'ADWIN Algorithm (Bifet 2007)', url: '', done: false },
-                { id: 'r12', text: 'Learning under Concept Drift (Zliobaite)', url: '', done: false },
-                { id: 'r13', text: 'Big Data in Smart Farming (Wolfert)', url: '', done: false },
+                { id: 'r12', text: 'Learning under Concept Drift', url: '', done: false },
             ]
         }
     ],
@@ -231,25 +192,215 @@ let data;
 let currentView = 'dashboard';
 
 // =============================================================
-//  PERSISTENCE
+//  PERSISTENCE - HYBRID (LOCAL + GITHUB)
 // =============================================================
-function load() {
+
+async function load() {
+    // 1. حمّل من localStorage أولاً (سريع)
     try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        data = raw ? JSON.parse(raw) : JSON.parse(JSON.stringify(DEFAULT));
-        if (!data.plans) data = JSON.parse(JSON.stringify(DEFAULT));
-        if (!data.journalEntries) data.journalEntries = [];
+        data = raw ? JSON.parse(raw) : null;
     } catch {
+        data = null;
+    }
+
+    // 2. حاول التحميل من GitHub (إذا مُعد)
+    if (SyncEngine.isConfigured()) {
+        try {
+            const remoteData = await SyncEngine.loadFromGitHub();
+            if (remoteData) {
+                // قارن: أيهما أحدث؟
+                const localDate = data?.lastActive || '';
+                const remoteDate = remoteData?.lastActive || '';
+
+                if (remoteDate >= localDate) {
+                    data = remoteData;
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                }
+            }
+        } catch (e) {
+            console.warn('GitHub load failed, using local:', e);
+        }
+    }
+
+    // 3. إذا لا يوجد بيانات أصلاً
+    if (!data || !data.plans) {
         data = JSON.parse(JSON.stringify(DEFAULT));
     }
+
+    // ضمان الحقول الجديدة
+    if (!data.journalEntries) data.journalEntries = [];
+    if (!data.resources) data.resources = [];
 }
 
 function save() {
+    // حفظ محلي فوري
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+
+    // حفظ على GitHub (مع تأخير)
+    SyncEngine.debouncedSave(data);
+}
+
+async function forceSyncNow() {
+    if (!SyncEngine.isConfigured()) {
+        toast('المزامنة غير مُعدة. اذهب للإعدادات.', 'error');
+        return;
+    }
+    toast('جاري المزامنة...', 'info');
+    const success = await SyncEngine.saveToGitHub(data);
+    if (success) {
+        toast('تمت المزامنة ✅', 'success');
+    } else {
+        toast('فشلت المزامنة ❌', 'error');
+    }
 }
 
 function uid() {
     return '_' + Math.random().toString(36).substr(2, 9);
+}
+
+// =============================================================
+//  SETUP FLOW
+// =============================================================
+
+async function saveSetup() {
+    const username = document.getElementById('setup-username').value.trim();
+    const repo = document.getElementById('setup-repo').value.trim();
+    const token = document.getElementById('setup-token').value.trim();
+
+    if (!username || !repo || !token) {
+        toast('أكمل جميع الحقول', 'error');
+        return;
+    }
+
+    toast('جاري التحقق...', 'info');
+
+    const validation = await SyncEngine.validateConnection(username, repo, token);
+
+    if (!validation.valid) {
+        toast(validation.error, 'error');
+        return;
+    }
+
+    SyncEngine.saveConfig({ username, repo, token });
+
+    // حاول تحميل البيانات من GitHub
+    const remoteData = await SyncEngine.loadFromGitHub();
+    if (remoteData && remoteData.plans) {
+        data = remoteData;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        toast('تم تحميل بياناتك من GitHub ✅', 'success');
+    } else {
+        // أول مرة: ارفع البيانات الافتراضية
+        await SyncEngine.saveToGitHub(data);
+        toast('تم الإعداد وحفظ البيانات ✅', 'success');
+    }
+
+    startApp();
+}
+
+function skipSetup() {
+    SyncEngine.saveConfig({ username: '', repo: '', token: '' });
+    startApp();
+}
+
+function startApp() {
+    document.getElementById('setup-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'flex';
+    render();
+}
+
+function openSettings() {
+    const config = SyncEngine.getConfig() || {};
+
+    openModal('⚙️ الإعدادات', `
+        <div class="setup-form">
+            <label>GitHub Username</label>
+            <input type="text" id="settings-username" value="${config.username || ''}">
+
+            <label>Repository Name</label>
+            <input type="text" id="settings-repo" value="${config.repo || ''}">
+
+            <label>GitHub Token</label>
+            <input type="password" id="settings-token" value="${config.token || ''}" placeholder="ghp_xxxxxxxxxxxx">
+
+            <div style="display:flex;gap:0.5rem;margin-top:1rem">
+                <button class="btn btn-primary" onclick="updateSettings()">حفظ</button>
+                <button class="btn btn-ghost" onclick="closeModal()">إلغاء</button>
+                <button class="btn btn-danger" onclick="resetAllData()" style="margin-right:auto">حذف كل البيانات</button>
+            </div>
+
+            <div style="margin-top:1rem;padding:0.75rem;background:var(--bg);border-radius:var(--radius-sm);font-size:0.8rem;color:var(--text-secondary)">
+                <strong>حالة المزامنة:</strong>
+                ${config.token ? '🟢 متصل' : '🔴 غير متصل (حفظ محلي فقط)'}
+                <br>
+                <strong>آخر نشاط:</strong> ${data.lastActive || 'لا يوجد'}
+            </div>
+        </div>
+    `);
+}
+
+async function updateSettings() {
+    const username = document.getElementById('settings-username').value.trim();
+    const repo = document.getElementById('settings-repo').value.trim();
+    const token = document.getElementById('settings-token').value.trim();
+
+    if (token && username && repo) {
+        const validation = await SyncEngine.validateConnection(username, repo, token);
+        if (!validation.valid) {
+            toast(validation.error, 'error');
+            return;
+        }
+    }
+
+    SyncEngine.saveConfig({ username, repo, token });
+    closeModal();
+
+    if (token) {
+        SyncEngine.updateSyncStatus('synced');
+        toast('تم تحديث الإعدادات ✅', 'success');
+        forceSyncNow();
+    } else {
+        SyncEngine.updateSyncStatus('local');
+        toast('الحفظ محلي فقط', 'info');
+    }
+}
+
+function resetAllData() {
+    if (!confirm('⚠️ حذف كل البيانات؟ لا يمكن التراجع!')) return;
+    if (!confirm('تأكيد أخير: سيتم حذف كل شيء!')) return;
+
+    localStorage.removeItem(STORAGE_KEY);
+    data = JSON.parse(JSON.stringify(DEFAULT));
+    save();
+    closeModal();
+    render();
+    toast('تم إعادة التعيين', 'info');
+}
+
+// =============================================================
+//  THEME
+// =============================================================
+function applyTheme() {
+    document.documentElement.setAttribute('data-theme', data.theme || 'dark');
+}
+
+function toggleTheme() {
+    data.theme = data.theme === 'dark' ? 'light' : 'dark';
+    applyTheme();
+    save();
+}
+
+// =============================================================
+//  STREAK
+// =============================================================
+function updateStreak() {
+    const today = new Date().toISOString().split('T')[0];
+    if (data.lastActive === today) return;
+    const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+    data.streak = data.lastActive === yesterday ? data.streak + 1 : 1;
+    data.lastActive = today;
+    save();
 }
 
 // =============================================================
