@@ -930,10 +930,10 @@
   "achievements": [
     "first_step"
   ],
-  "lastModified": "2026-03-30T13:32:24.815Z",
+  "lastModified": "2026-03-30T16:17:43.352Z",
   "pomodoroLog": {
     "2026-03-28": 45,
-    "2026-03-30": 25
+    "2026-03-30": 50
   },
   "weeklyGoals": null,
   "tags": [
@@ -945,7 +945,7 @@
   ],
   "_nightActivity": false,
   "_earlyActivity": false,
-  "lastSync": "2026-03-30T13:32:28.924Z",
+  "lastSync": "2026-03-30T16:17:46.853Z",
   "syncDevice": "desktop_oxch",
   "flashcards": {
     "decks": []
