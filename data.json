@@ -924,13 +924,13 @@
   ],
   "journal": "",
   "journalEntries": [],
-  "streak": 1,
-  "lastActive": "2026-03-30",
+  "streak": 2,
+  "lastActive": "2026-03-31",
   "theme": "light",
   "achievements": [
     "first_step"
   ],
-  "lastModified": "2026-03-30T16:17:43.352Z",
+  "lastModified": "2026-03-31T09:56:40.048Z",
   "pomodoroLog": {
     "2026-03-28": 45,
     "2026-03-30": 50
@@ -945,7 +945,7 @@
   ],
   "_nightActivity": false,
   "_earlyActivity": false,
-  "lastSync": "2026-03-30T16:17:46.853Z",
+  "lastSync": "2026-03-31T09:56:43.059Z",
   "syncDevice": "desktop_oxch",
   "flashcards": {
     "decks": []
