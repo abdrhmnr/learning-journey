@@ -725,6 +725,1208 @@
           ]
         }
       ]
+    },
+    {
+      "id": "_mngl4dzeyiog3",
+      "name": "🤖 AI Engineer Mastery – LLM & RAG",
+      "icon": "🤖",
+      "groups": [
+        {
+          "id": "_mngl4dzeamt24",
+          "name": "أسابيع 1-4: الأساسيات (رياضيات + احتمال + إحصاء)",
+          "collapsed": false,
+          "tasks": [
+            {
+              "id": "_mngl4dzevyfe4",
+              "name": "math 1/Functions [2SpgdHN5dKU].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzejwn6x",
+              "name": "math 1/Transformations of Functions [t644SoGQ4xU].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzehh95r",
+              "name": "math 1/Absolute Function [v8WLmE2bGSQ].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeuiv0n",
+              "name": "math 1/Inverse Function [i2izH2b2PlY].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeaffws",
+              "name": "math 1/Trigonometric Functions [fzlWZ5KUM7A].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeuf76d",
+              "name": "math 1/Exponential & Logarithmic [4xv6JSnnBno].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzey5asl",
+              "name": "math 1/Hyperbolic Functions [5P5KOjTBr9Q].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze4j51z",
+              "name": "math 1/Inverse Trigonometric [UwAqGDrowsY].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzek0bw7",
+              "name": "math 1/Inverse Hyperbolic [giJc5s6q2js].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzezh1wm",
+              "name": "math 1/Limits L'Hopital [jl_B8--XQS0].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze0g0tw",
+              "name": "math 1/Basic Table and Rules of Differentiation [cfZGo5B3J6E].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze3hn0t",
+              "name": "math 1/Additional Notes on Differentiation [bDPmE0rzHyQ].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzedufr7",
+              "name": "math 1/Lecture03- Differentiation II [PNkvpZALu8E].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzegeizp",
+              "name": "math 1/Lecture04- Inverse Function and Inverse Trigonometric [VuCHLzhz_io].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzejjnhn",
+              "name": "math 1/Lecture 06 - Applications of Differentiation [0MWdUPosYh8].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeknb3e",
+              "name": "math 1/Selected applications of differentiation [qc7RC8OjYgQ].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzelpg3y",
+              "name": "math 1/Introduction to integration(1) [aTh6710uaeY].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzels1qz",
+              "name": "math 1/Introduction to integration (2) [D6ELbhq-xag].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzex0d52",
+              "name": "probability & stat/00- Statistical Analysis [CL-fAMiysnk].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzekugd3",
+              "name": "probability & stat/01- Probability and Statistics [GmJJ2iZz08c].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeygj6d",
+              "name": "probability & stat/02- Counting & Probability [NrdCDmSAn7c].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeik5iu",
+              "name": "probability & stat/03- Rules& Conditional Probability [raeVQxzY7iE].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzesuhtq",
+              "name": "probability & stat/04- Bayes Rule & RV [zWDzNUTfk9s].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze5epex",
+              "name": "Coursera - Bayesian Statistics From Concept to Data Analysis (كامل)",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzezu3o7",
+              "name": "Coursera - Bayesian Statistics Techniques and Models (كامل)",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzesju7u",
+              "name": "Coursera - Bayesian Statistics Mixture Models (كامل)",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzez2ysa",
+              "name": "Coursera - Bayesian Statistics Time Series Analysis (كامل)",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            }
+          ]
+        },
+        {
+          "id": "_mngl4dzei5eod",
+          "name": "أسابيع 5-7: Machine Learning أساسي (CS229 2022)",
+          "collapsed": false,
+          "tasks": [
+            {
+              "id": "_mngl4dzez0nsg",
+              "name": "229/Stanford CS229 Machine Learning I Introduction I 2022 I Lecture 1 [Bl4Feh_Mjvo].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeiobcc",
+              "name": "229/Stanford CS229 Machine Learning I Supervised learning setup, LMS I 2022 I Lecture 2 [gqKaVgQxEJ0].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzetluij",
+              "name": "229/Stanford CS229 Machine Learning I Weighted Least Squares, Logistic regression, Newton's Method I 2022 I Lecture 3 [k_pDh_68K6c].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze1m1il",
+              "name": "229/Stanford CS229 Machine Learning I Exponential family, Generalized Linear Models I 2022 I Lecture 4 [goDDnBbJQ4g].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeu8rgc",
+              "name": "229/Stanford CS229 Machine Learning I Gaussian discriminant analysis, Naive Bayes I 2022 I Lecture 5 [RMy_1mO4HLk].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeu6tnn",
+              "name": "229/Stanford CS229 Machine Learning I Naive Bayes, Laplace Smoothing I 2022 I Lecture 6 [ADj95edZc0w].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze2cqos",
+              "name": "229/Stanford CS229 Machine Learning I Kernels I 2022 I Lecture 7 [dzDOqrac9Ks].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzebegue",
+              "name": "229/Stanford CS229 Machine Learning I Neural Networks 1 I 2022 I Lecture 8 [ZMxfDWPXmjc].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzevfr75",
+              "name": "229/Stanford CS229 Machine Learning I Neural Networks 2 (backprop) I 2022 I Lecture 9 [UbtTv7j1tzU].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze8o49w",
+              "name": "229/Stanford CS229 Machine Learning I Bias - Variance, Regularization I 2022 I Lecture 10 [7AQYw5FOVcw].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzej0nd8",
+              "name": "229/Stanford CS229 Machine Learning I Feature / Model selection, ML Advice I 2022 I Lecture 11 [NirZnqwYfYU].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            }
+          ]
+        },
+        {
+          "id": "_mngl4dzesk697",
+          "name": "أسابيع 8-11: Deep Learning (CS230 + fast.ai + DS620)",
+          "collapsed": false,
+          "tasks": [
+            {
+              "id": "_mngl4dze146vp",
+              "name": "230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 1 [PySo_6S4ZAg].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeb5yqj",
+              "name": "230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 2 [AwQHqWyHRpU].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze9if6w",
+              "name": "230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 3 [JUJNGv_sb4Y].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze5wu1c",
+              "name": "230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 4 [ANszao6YQuM].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeldk4s",
+              "name": "230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 5 [IM9ANAbufYM].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeb4qx0",
+              "name": "230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 6 [G5FNYxbW_Qw].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzej9g9e",
+              "name": "230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 7 [gCJCgQW_LKc].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzegumxo",
+              "name": "230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 8 [733m6qBH-jI].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeo7twm",
+              "name": "230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 9 [NP2XqpgTJyo].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzegwxhj",
+              "name": "230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 10 [IFLstgCNOA4].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze4kqfb",
+              "name": "DL/Lesson 1： Practical Deep Learning for Coders 2022 [8SF_h3xF3cE].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeqmj35",
+              "name": "DL/Lesson 2： Practical Deep Learning for Coders 2022 [F4tvM4Vb3A0].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeysie5",
+              "name": "DL/Lesson 3： Practical Deep Learning for Coders 2022 [hBBOjCiFcuo].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze5n779",
+              "name": "DL/Lesson 4： Practical Deep Learning for Coders 2022 [toUgBQv1BT8].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzetw3vw",
+              "name": "DL/Lesson 5： Practical Deep Learning for Coders 2022 [_rXzeWq4C6w].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze9sabb",
+              "name": "DL/Lesson 6： Practical Deep Learning for Coders 2022 [AdhG64NF76E].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeqh1cq",
+              "name": "DL/Lesson 7： Practical Deep Learning for Coders 2022 [p4ZZq0736Po].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeabjuh",
+              "name": "DL/Lesson 8 - Practical Deep Learning for Coders 2022 [htiNBPxcXgo].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze4fkb0",
+              "name": "DL/Lesson 9： Deep Learning Foundations to Stable Diffusion [_7rMfsA24Ls].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzexfxf1",
+              "name": "DS620/01-01-DS610LectureOne_Introduction.mp4",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeikesb",
+              "name": "DS620/02-01-DS620LectureTwo-Perceptron.mp4",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze7cku7",
+              "name": "DS620/03-01-DS620LectureThree-GD.mp4",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzei332c",
+              "name": "DS620/04-01-DS620LectureFour-ِActivationFuctions.mp4",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzea2lxd",
+              "name": "DS620/05-01-DS620LectureFive-ِOptimization.mp4",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            }
+          ]
+        },
+        {
+          "id": "_mngl4dzezkbip",
+          "name": "أسابيع 12-19: LLMs من الصفر (CS336 + mini-rag)",
+          "collapsed": false,
+          "tasks": [
+            {
+              "id": "_mngl4dze2p7l7",
+              "name": "336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 1： Overview and Tokenization [SQ3fZ1sAqXI].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze4yw5u",
+              "name": "336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lec. 2： Pytorch, Resource Accounting [msHyYioAyNE].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeqky2l",
+              "name": "336/Stanford CS336 Lang. Modeling from Scratch ｜ Spring 2025 ｜ Lec. 3： Architectures, Hyperparameters [ptFiH_bHnJw].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzep0g7l",
+              "name": "336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 4： Mixture of experts [LPv1KfUXLCo].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzepry0c",
+              "name": "336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 5： GPUs [6OBtO9niT00].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeak7ce",
+              "name": "336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 6： Kernels, Triton [E8Mju53VB00].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeyyy3k",
+              "name": "336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 7： Parallelism 1 [l1RJcDjzK8M].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeokn8i",
+              "name": "336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 8： Parallelism 2 [LHpr5ytssLo].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzehosbd",
+              "name": "336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 9： Scaling laws 1 [6Q-ESEmDf4Q].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzehxgdc",
+              "name": "336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 10： Inference [fcgPYo3OtV0].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeijbpq",
+              "name": "336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 11： Scaling laws 2 [OSYuUqGBQxw].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeqge9l",
+              "name": "336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 12： Evaluation [x-R5l2HsXqM].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzepeqis",
+              "name": "336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 13： Data 1 [WePxmeXU1xg].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze6s0b5",
+              "name": "336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 14： Data 2 [9Cd0THLS1t0].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzedeq27",
+              "name": "336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 15： Alignment - SFT⧸RLHF [Dfu7vC9jo4w].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze1gglv",
+              "name": "336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 16： Alignment - RL 1 [46f2QTDB08Q].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze592f9",
+              "name": "336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 17： Alignment - RL 2 [JdGFdViaOJk].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze7dmma",
+              "name": "mini-rag/027 - mini-RAG ｜ 01 ｜ About the Course [Arabic].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzewr97b",
+              "name": "mini-rag/026 - mini-RAG ｜ 02 ｜ What will we build.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeoq6ks",
+              "name": "mini-rag/025 - mini-RAG ｜ 03 ｜ Setup your tools.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeukmfm",
+              "name": "mini-rag/024 - mini-RAG ｜ 04 ｜ Project Architecture.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze6t02x",
+              "name": "mini-rag/023 - mini-RAG ｜ 05 ｜ Welcome to FastAPI.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze9ipzq",
+              "name": "mini-rag/022 - mini-RAG ｜ 06 ｜ Nested Routes + Env Values.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze3mvl3",
+              "name": "mini-rag/021 - mini-RAG ｜ 07 ｜ Uploading a File.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzegcwbx",
+              "name": "mini-rag/020 - mini-RAG ｜ 08 ｜ File Processing.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze005pp",
+              "name": "mini-rag/019 - mini-RAG ｜ 09 ｜ Docker - MongoDB - Motor.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzesdd23",
+              "name": "mini-rag/018 - mini-RAG ｜ 10 ｜ Mongo Schemes and Models.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze8ani1",
+              "name": "mini-rag/017 - mini-RAG ｜ 11 ｜ Mongo Indexing.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzex3vm3",
+              "name": "mini-rag/016 - mini-RAG ｜ 12 ｜ Data Pipeline Enhancements.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzevigqo",
+              "name": "mini-rag/015 - mini-RAG ｜ 13 ｜ Checkpoint-1.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze0k7p6",
+              "name": "mini-rag/014 - mini-RAG ｜ 14 ｜ LLM Factory.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzentcg3",
+              "name": "mini-rag/013 - mini-RAG ｜ 15 ｜ Vector DB Factory ｜ QDrant.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzew27cs",
+              "name": "mini-rag/012 - mini-RAG ｜ 16 ｜ Semantic Search.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzehvs6l",
+              "name": "mini-rag/011 - mini-RAG ｜ 17 ｜ Augmented Answers.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze4vcee",
+              "name": "mini-rag/009 - mini-RAG ｜ 18 ｜ Checkpoint-2.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzevi52r",
+              "name": "mini-rag/008 - mini-RAG ｜ 19 ｜ Ollama Local LLM Server.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze5dkq8",
+              "name": "mini-rag/006 - mini-RAG ｜ 20 ｜ From Mongo to Postgres.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeiq9f4",
+              "name": "mini-rag/004 - mini-RAG ｜ 21 ｜ The Way to PGVector.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzewidra",
+              "name": "mini-rag/003 - mini-RAG ｜ 22 ｜ App Deployment ｜ Step 1.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzek71o4",
+              "name": "mini-rag/002 - mini-RAG ｜ 23 ｜ App Deployment ｜ Step 2.mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            }
+          ]
+        },
+        {
+          "id": "_mngl4dzemlxpx",
+          "name": "أسابيع 20-24: مشاريع + Production + Portfolio",
+          "collapsed": false,
+          "tasks": [
+            {
+              "id": "_mngl4dze7z2mn",
+              "name": "ml projects/Air Quality Index Prediction [0myaZxl4XWw].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzetoxdc",
+              "name": "ml projects/Diabetes Prediction [AxYgzie4x2E].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze46ylk",
+              "name": "ml projects/FAKE NEWS DETECTION [CkiXRQvz4Z4].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze2bsv5",
+              "name": "ml projects/HEART DISEASE DETECTION [F_9gGyCs3YY].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeqf6at",
+              "name": "ml projects/Image Classification using CNN [qm56XcRBXWc].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeyrvwd",
+              "name": "ml projects/MOVIE RECOMMENDATION SYSTEM [kxT8AursXXw].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzelsxvp",
+              "name": "ml projects/STOCK PRICE PREDICTION [tn07dCSFOfQ].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzejm4tx",
+              "name": "ml projects/TITANIC SURVIVAL PREDICTION [cRYSIR6LaNQ].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzetwljq",
+              "name": "ml projects/TWITTER SENTIMENT ANALYSIS [4YGkfAd2iXM].webm",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzeni1ib",
+              "name": "ml projects/WINE QUALITY PREDICTION [MyllYgc-kh8].mkv",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dze1gkhz",
+              "name": "data engineering/The Data Engineering Bootcamp Zero to Mastery (كامل)",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzec5x0e",
+              "name": "CS231N/Stanford CS231N Deep Learning for Computer Vision ｜ Spring 2025 (كل المحاضرات)",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzelipaa",
+              "name": "إعادة بناء mini-RAG كامل من الصفر (مشروع التخرج)",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            },
+            {
+              "id": "_mngl4dzemm76b",
+              "name": "إنشاء Portfolio على GitHub + نشر النموذج",
+              "status": "pending",
+              "date": "",
+              "subs": [],
+              "notes": "",
+              "tags": [],
+              "links": []
+            }
+          ]
+        }
+      ]
     }
   ],
   "projects": [
@@ -931,7 +2133,7 @@
     "first_step",
     "three_streak"
   ],
-  "lastModified": "2026-04-01T16:40:38.011Z",
+  "lastModified": "2026-04-01T21:55:39.338Z",
   "pomodoroLog": {
     "2026-03-28": 45,
     "2026-03-30": 50
@@ -946,8 +2148,8 @@
   ],
   "_nightActivity": false,
   "_earlyActivity": false,
-  "lastSync": "2026-04-01T16:40:41.023Z",
-  "syncDevice": "desktop_oxch",
+  "lastSync": "2026-04-01T21:55:42.698Z",
+  "syncDevice": "desktop_q2wn",
   "flashcards": {
     "decks": []
   },
