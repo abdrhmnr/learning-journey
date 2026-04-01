@@ -1254,5 +1254,161 @@ window.render = function () {
         }
     }, 200);
 };
+// =============================================================
+//  🔥 AI ENGINEER MASTERY – LLM & RAG FROM SCRATCH (24 أسبوع)
+//  الخطة الكاملة التي طلبتها مع أسماء الملفات بالضبط من الـ tree
+// =============================================================
+PlanTemplates.templates.unshift({
+    id: 'tpl_ai_engineer_full',
+    name: '🤖 AI Engineer Mastery – LLM & RAG',
+    icon: '🤖',
+    desc: 'من الصفر إلى مهندس ذكاء اصطناعي متخصص (LLMs + RAG + Production) - 24 أسبوع',
+    duration: '6 أشهر',
+    groups: [
+        {
+            name: 'أسابيع 1-4: الأساسيات (رياضيات + احتمال + إحصاء)',
+            tasks: [
+                'math 1/Functions [2SpgdHN5dKU].webm',
+                'math 1/Transformations of Functions [t644SoGQ4xU].webm',
+                'math 1/Absolute Function [v8WLmE2bGSQ].webm',
+                'math 1/Inverse Function [i2izH2b2PlY].webm',
+                'math 1/Trigonometric Functions [fzlWZ5KUM7A].webm',
+                'math 1/Exponential & Logarithmic [4xv6JSnnBno].webm',
+                'math 1/Hyperbolic Functions [5P5KOjTBr9Q].webm',
+                'math 1/Inverse Trigonometric [UwAqGDrowsY].webm',
+                'math 1/Inverse Hyperbolic [giJc5s6q2js].mkv',
+                'math 1/Limits L\'Hopital [jl_B8--XQS0].mkv',
+                'math 1/Basic Table and Rules of Differentiation [cfZGo5B3J6E].webm',
+                'math 1/Additional Notes on Differentiation [bDPmE0rzHyQ].mkv',
+                'math 1/Lecture03- Differentiation II [PNkvpZALu8E].webm',
+                'math 1/Lecture04- Inverse Function and Inverse Trigonometric [VuCHLzhz_io].mkv',
+                'math 1/Lecture 06 - Applications of Differentiation [0MWdUPosYh8].mkv',
+                'math 1/Selected applications of differentiation [qc7RC8OjYgQ].mkv',
+                'math 1/Introduction to integration(1) [aTh6710uaeY].webm',
+                'math 1/Introduction to integration (2) [D6ELbhq-xag].mkv',
+                'probability & stat/00- Statistical Analysis [CL-fAMiysnk].webm',
+                'probability & stat/01- Probability and Statistics [GmJJ2iZz08c].webm',
+                'probability & stat/02- Counting & Probability [NrdCDmSAn7c].webm',
+                'probability & stat/03- Rules& Conditional Probability [raeVQxzY7iE].webm',
+                'probability & stat/04- Bayes Rule & RV [zWDzNUTfk9s].webm',
+                'Coursera - Bayesian Statistics From Concept to Data Analysis (كامل)',
+                'Coursera - Bayesian Statistics Techniques and Models (كامل)',
+                'Coursera - Bayesian Statistics Mixture Models (كامل)',
+                'Coursera - Bayesian Statistics Time Series Analysis (كامل)'
+            ]
+        },
+        {
+            name: 'أسابيع 5-7: Machine Learning أساسي (CS229 2022)',
+            tasks: [
+                '229/Stanford CS229 Machine Learning I Introduction I 2022 I Lecture 1 [Bl4Feh_Mjvo].webm',
+                '229/Stanford CS229 Machine Learning I Supervised learning setup, LMS I 2022 I Lecture 2 [gqKaVgQxEJ0].webm',
+                '229/Stanford CS229 Machine Learning I Weighted Least Squares, Logistic regression, Newton\'s Method I 2022 I Lecture 3 [k_pDh_68K6c].webm',
+                '229/Stanford CS229 Machine Learning I Exponential family, Generalized Linear Models I 2022 I Lecture 4 [goDDnBbJQ4g].mkv',
+                '229/Stanford CS229 Machine Learning I Gaussian discriminant analysis, Naive Bayes I 2022 I Lecture 5 [RMy_1mO4HLk].mkv',
+                '229/Stanford CS229 Machine Learning I Naive Bayes, Laplace Smoothing I 2022 I Lecture 6 [ADj95edZc0w].mkv',
+                '229/Stanford CS229 Machine Learning I Kernels I 2022 I Lecture 7 [dzDOqrac9Ks].mkv',
+                '229/Stanford CS229 Machine Learning I Neural Networks 1 I 2022 I Lecture 8 [ZMxfDWPXmjc].mkv',
+                '229/Stanford CS229 Machine Learning I Neural Networks 2 (backprop) I 2022 I Lecture 9 [UbtTv7j1tzU].mkv',
+                '229/Stanford CS229 Machine Learning I Bias - Variance, Regularization I 2022 I Lecture 10 [7AQYw5FOVcw].mkv',
+                '229/Stanford CS229 Machine Learning I Feature / Model selection, ML Advice I 2022 I Lecture 11 [NirZnqwYfYU].mkv'
+            ]
+        },
+        {
+            name: 'أسابيع 8-11: Deep Learning (CS230 + fast.ai + DS620)',
+            tasks: [
+                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 1 [PySo_6S4ZAg].webm',
+                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 2 [AwQHqWyHRpU].webm',
+                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 3 [JUJNGv_sb4Y].mkv',
+                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 4 [ANszao6YQuM].mkv',
+                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 5 [IM9ANAbufYM].mkv',
+                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 6 [G5FNYxbW_Qw].mkv',
+                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 7 [gCJCgQW_LKc].mkv',
+                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 8 [733m6qBH-jI].webm',
+                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 9 [NP2XqpgTJyo].mkv',
+                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 10 [IFLstgCNOA4].mkv',
+                'DL/Lesson 1： Practical Deep Learning for Coders 2022 [8SF_h3xF3cE].webm',
+                'DL/Lesson 2： Practical Deep Learning for Coders 2022 [F4tvM4Vb3A0].webm',
+                'DL/Lesson 3： Practical Deep Learning for Coders 2022 [hBBOjCiFcuo].webm',
+                'DL/Lesson 4： Practical Deep Learning for Coders 2022 [toUgBQv1BT8].webm',
+                'DL/Lesson 5： Practical Deep Learning for Coders 2022 [_rXzeWq4C6w].webm',
+                'DL/Lesson 6： Practical Deep Learning for Coders 2022 [AdhG64NF76E].mkv',
+                'DL/Lesson 7： Practical Deep Learning for Coders 2022 [p4ZZq0736Po].mkv',
+                'DL/Lesson 8 - Practical Deep Learning for Coders 2022 [htiNBPxcXgo].mkv',
+                'DL/Lesson 9： Deep Learning Foundations to Stable Diffusion [_7rMfsA24Ls].webm',
+                'DS620/01-01-DS610LectureOne_Introduction.mp4',
+                'DS620/02-01-DS620LectureTwo-Perceptron.mp4',
+                'DS620/03-01-DS620LectureThree-GD.mp4',
+                'DS620/04-01-DS620LectureFour-ِActivationFuctions.mp4',
+                'DS620/05-01-DS620LectureFive-ِOptimization.mp4'
+            ]
+        },
+        {
+            name: 'أسابيع 12-19: LLMs من الصفر (CS336 + mini-rag)',
+            tasks: [
+                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 1： Overview and Tokenization [SQ3fZ1sAqXI].webm',
+                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lec. 2： Pytorch, Resource Accounting [msHyYioAyNE].webm',
+                '336/Stanford CS336 Lang. Modeling from Scratch ｜ Spring 2025 ｜ Lec. 3： Architectures, Hyperparameters [ptFiH_bHnJw].webm',
+                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 4： Mixture of experts [LPv1KfUXLCo].webm',
+                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 5： GPUs [6OBtO9niT00].webm',
+                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 6： Kernels, Triton [E8Mju53VB00].webm',
+                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 7： Parallelism 1 [l1RJcDjzK8M].webm',
+                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 8： Parallelism 2 [LHpr5ytssLo].webm',
+                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 9： Scaling laws 1 [6Q-ESEmDf4Q].webm',
+                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 10： Inference [fcgPYo3OtV0].webm',
+                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 11： Scaling laws 2 [OSYuUqGBQxw].webm',
+                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 12： Evaluation [x-R5l2HsXqM].webm',
+                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 13： Data 1 [WePxmeXU1xg].webm',
+                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 14： Data 2 [9Cd0THLS1t0].webm',
+                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 15： Alignment - SFT⧸RLHF [Dfu7vC9jo4w].webm',
+                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 16： Alignment - RL 1 [46f2QTDB08Q].webm',
+                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 17： Alignment - RL 2 [JdGFdViaOJk].webm',
+                'mini-rag/027 - mini-RAG ｜ 01 ｜ About the Course [Arabic].mkv',
+                'mini-rag/026 - mini-RAG ｜ 02 ｜ What will we build.mkv',
+                'mini-rag/025 - mini-RAG ｜ 03 ｜ Setup your tools.mkv',
+                'mini-rag/024 - mini-RAG ｜ 04 ｜ Project Architecture.mkv',
+                'mini-rag/023 - mini-RAG ｜ 05 ｜ Welcome to FastAPI.mkv',
+                'mini-rag/022 - mini-RAG ｜ 06 ｜ Nested Routes + Env Values.mkv',
+                'mini-rag/021 - mini-RAG ｜ 07 ｜ Uploading a File.mkv',
+                'mini-rag/020 - mini-RAG ｜ 08 ｜ File Processing.mkv',
+                'mini-rag/019 - mini-RAG ｜ 09 ｜ Docker - MongoDB - Motor.mkv',
+                'mini-rag/018 - mini-RAG ｜ 10 ｜ Mongo Schemes and Models.mkv',
+                'mini-rag/017 - mini-RAG ｜ 11 ｜ Mongo Indexing.mkv',
+                'mini-rag/016 - mini-RAG ｜ 12 ｜ Data Pipeline Enhancements.mkv',
+                'mini-rag/015 - mini-RAG ｜ 13 ｜ Checkpoint-1.mkv',
+                'mini-rag/014 - mini-RAG ｜ 14 ｜ LLM Factory.mkv',
+                'mini-rag/013 - mini-RAG ｜ 15 ｜ Vector DB Factory ｜ QDrant.mkv',
+                'mini-rag/012 - mini-RAG ｜ 16 ｜ Semantic Search.mkv',
+                'mini-rag/011 - mini-RAG ｜ 17 ｜ Augmented Answers.mkv',
+                'mini-rag/009 - mini-RAG ｜ 18 ｜ Checkpoint-2.mkv',
+                'mini-rag/008 - mini-RAG ｜ 19 ｜ Ollama Local LLM Server.mkv',
+                'mini-rag/006 - mini-RAG ｜ 20 ｜ From Mongo to Postgres.mkv',
+                'mini-rag/004 - mini-RAG ｜ 21 ｜ The Way to PGVector.mkv',
+                'mini-rag/003 - mini-RAG ｜ 22 ｜ App Deployment ｜ Step 1.mkv',
+                'mini-rag/002 - mini-RAG ｜ 23 ｜ App Deployment ｜ Step 2.mkv'
+            ]
+        },
+        {
+            name: 'أسابيع 20-24: مشاريع + Production + Portfolio',
+            tasks: [
+                'ml projects/Air Quality Index Prediction [0myaZxl4XWw].webm',
+                'ml projects/Diabetes Prediction [AxYgzie4x2E].mkv',
+                'ml projects/FAKE NEWS DETECTION [CkiXRQvz4Z4].webm',
+                'ml projects/HEART DISEASE DETECTION [F_9gGyCs3YY].mkv',
+                'ml projects/Image Classification using CNN [qm56XcRBXWc].mkv',
+                'ml projects/MOVIE RECOMMENDATION SYSTEM [kxT8AursXXw].mkv',
+                'ml projects/STOCK PRICE PREDICTION [tn07dCSFOfQ].mkv',
+                'ml projects/TITANIC SURVIVAL PREDICTION [cRYSIR6LaNQ].mkv',
+                'ml projects/TWITTER SENTIMENT ANALYSIS [4YGkfAd2iXM].webm',
+                'ml projects/WINE QUALITY PREDICTION [MyllYgc-kh8].mkv',
+                'data engineering/The Data Engineering Bootcamp Zero to Mastery (كامل)',
+                'CS231N/Stanford CS231N Deep Learning for Computer Vision ｜ Spring 2025 (كل المحاضرات)',
+                'إعادة بناء mini-RAG كامل من الصفر (مشروع التخرج)',
+                'إنشاء Portfolio على GitHub + نشر النموذج'
+            ]
+        }
+    ]
+});
+
+console.log('✅ تم إضافة خطة AI Engineer Mastery الكاملة (24 أسبوع) إلى PlanTemplates');
 
 console.log('✅ Features v3.3 loaded: XP + Habits + Kanban + Countdown + Templates + Charts + Sticky Notes + PDF + Weekly Compare');
