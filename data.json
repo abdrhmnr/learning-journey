@@ -2214,7 +2214,7 @@
               "id": "_mnhc3z5bfu70d",
               "name": "Lecture 1 [Bl4Feh_Mjvo].webm",
               "file": "02_CS229_Machine_Learning/Stanford CS229 Machine Learning I Introduction I 2022 I Lecture 1 [Bl4Feh_Mjvo].webm",
-              "status": "pending",
+              "status": "done",
               "date": "",
               "subs": [],
               "notes": "",
@@ -2958,7 +2958,7 @@
     "first_step",
     "three_streak"
   ],
-  "lastModified": "2026-04-02T12:13:27.803Z",
+  "lastModified": "2026-04-02T13:16:44.062Z",
   "pomodoroLog": {
     "2026-03-28": 45,
     "2026-03-30": 50
@@ -2973,15 +2973,21 @@
   ],
   "_nightActivity": false,
   "_earlyActivity": false,
-  "lastSync": "2026-04-02T12:16:02.927Z",
+  "lastSync": "2026-04-02T13:16:47.075Z",
   "syncDevice": "desktop_oxch",
   "flashcards": {
     "decks": []
   },
   "ytPlaylists": [],
   "xp": {
-    "points": 0,
-    "history": []
+    "points": 5,
+    "history": [
+      {
+        "amount": 5,
+        "reason": "فيديو: Lecture 1 [Bl4Feh_Mjvo].webm",
+        "date": "2026-04-02T13:16:44.062Z"
+      }
+    ]
   },
   "habits": [],
   "countdowns": [],
