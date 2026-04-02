@@ -2959,10 +2959,11 @@
     "three_streak",
     "five_tasks"
   ],
-  "lastModified": "2026-04-02T13:16:50.323Z",
+  "lastModified": "2026-04-02T23:15:10.850Z",
   "pomodoroLog": {
     "2026-03-28": 45,
-    "2026-03-30": 50
+    "2026-03-30": 50,
+    "2026-04-02": 25
   },
   "weeklyGoals": null,
   "tags": [
@@ -2974,7 +2975,7 @@
   ],
   "_nightActivity": false,
   "_earlyActivity": false,
-  "lastSync": "2026-04-02T13:16:53.836Z",
+  "lastSync": "2026-04-02T23:15:14.307Z",
   "syncDevice": "desktop_oxch",
   "flashcards": {
     "decks": []
