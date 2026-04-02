@@ -1,8 +1,13 @@
 // =============================================================
-//  FEATURES v3.3
-//  XP + Habits + Kanban + Countdown + Templates +
-//  Charts + Sticky Notes + PDF + Weekly Compare
+//  FEATURES v3.3 FIXED & COMPLETE
+//  XP + Habits + Kanban + Countdown + Templates + Charts + Sticky + PDF + AI Plan
 // =============================================================
+
+// ---- حماية من التحميل المتكرر ----
+if (window.__v33_loaded) {
+    console.warn('⚠️ Features v3.3 already loaded, skipping duplicate.');
+} else {
+window.__v33_loaded = true;
 
 // ---- ضمان الحقول ----
 (function ensureV33Fields() {
@@ -13,9 +18,8 @@
 })();
 
 // =============================================================
-//  🎮 G - XP & LEVELING SYSTEM
+//  🎮 XP & LEVELING SYSTEM
 // =============================================================
-
 const XPSystem = {
     levels: [
         { level: 1, name: 'مبتدئ', icon: '🌱', xp: 0 },
@@ -29,32 +33,19 @@ const XPSystem = {
         { level: 9, name: 'عبقري', icon: '🏆', xp: 4000 },
         { level: 10, name: 'سيد المعرفة', icon: '🌟', xp: 6000 }
     ],
-
     xpRewards: {
-        taskDone: 10,
-        subDone: 3,
-        pomodoroSession: 8,
-        journalEntry: 5,
-        habitCheck: 4,
-        resourceDone: 5,
-        flashcardReview: 2,
-        videoWatched: 5,
-        streakDay: 2,
-        achievementUnlock: 25,
-        planComplete: 100,
-        projectPhase: 20
+        taskDone: 10, subDone: 3, pomodoroSession: 8, journalEntry: 5,
+        habitCheck: 4, resourceDone: 5, flashcardReview: 2, videoWatched: 5,
+        streakDay: 2, achievementUnlock: 25, planComplete: 100, projectPhase: 20
     },
 
-    getTotal() {
-        return data.xp?.points || 0;
-    },
+    getTotal() { return data.xp?.points || 0; },
 
     getCurrentLevel() {
         const total = this.getTotal();
         let current = this.levels[0];
         for (const lvl of this.levels) {
-            if (total >= lvl.xp) current = lvl;
-            else break;
+            if (total >= lvl.xp) current = lvl; else break;
         }
         return current;
     },
@@ -70,28 +61,19 @@ const XPSystem = {
         const next = this.getNextLevel();
         if (!next) return 100;
         const total = this.getTotal();
-        return Math.round(((total - current.xp) / (next.xp - current.xp)) * 100);
+        const range = next.xp - current.xp;
+        if (range <= 0) return 100;
+        return Math.min(100, Math.round(((total - current.xp) / range) * 100));
     },
 
     addXP(amount, reason) {
         if (!data.xp) data.xp = { points: 0, history: [] };
-        data.xp.points += amount;
-        data.xp.history.push({
-            amount,
-            reason,
-            date: new Date().toISOString()
-        });
-
-        // حد أقصى 100 سجل
-        if (data.xp.history.length > 100) {
-            data.xp.history = data.xp.history.slice(-100);
-        }
-
-        // فحص ارتقاء المستوى
         const oldLevel = this.getCurrentLevel();
+        data.xp.points += amount;
+        data.xp.history.push({ amount, reason, date: new Date().toISOString() });
+        if (data.xp.history.length > 100) data.xp.history = data.xp.history.slice(-100);
         save();
         const newLevel = this.getCurrentLevel();
-
         if (newLevel.level > oldLevel.level) {
             this._showLevelUp(newLevel);
         } else {
@@ -102,24 +84,18 @@ const XPSystem = {
     _showXPPopup(amount, reason) {
         const popup = document.createElement('div');
         popup.className = 'xp-popup';
-        popup.innerHTML = `
-            <div class="xp-popup-text">+${amount} XP</div>
-            <div class="xp-popup-sub">${reason}</div>
-        `;
+        popup.innerHTML = `<div class="xp-popup-text">+${amount} XP</div><div class="xp-popup-sub">${reason}</div>`;
         document.body.appendChild(popup);
-        setTimeout(() => popup.remove(), 2200);
+        setTimeout(() => { if (popup.parentNode) popup.remove(); }, 2200);
     },
 
     _showLevelUp(level) {
         toast(`🎉 ارتقيت إلى المستوى ${level.level}: ${level.icon} ${level.name}!`, 'success');
         const popup = document.createElement('div');
         popup.className = 'xp-popup';
-        popup.innerHTML = `
-            <div class="xp-popup-text">${level.icon} Level ${level.level}!</div>
-            <div class="xp-popup-sub">${level.name}</div>
-        `;
+        popup.innerHTML = `<div class="xp-popup-text">${level.icon} Level ${level.level}!</div><div class="xp-popup-sub">${level.name}</div>`;
         document.body.appendChild(popup);
-        setTimeout(() => popup.remove(), 3000);
+        setTimeout(() => { if (popup.parentNode) popup.remove(); }, 3000);
     },
 
     renderBar() {
@@ -127,7 +103,6 @@ const XPSystem = {
         const next = this.getNextLevel();
         const pct = this.getProgress();
         const total = this.getTotal();
-
         return `
             <div class="xp-bar-container">
                 <div class="xp-avatar">${current.icon}</div>
@@ -152,23 +127,27 @@ const XPSystem = {
 // ---- ربط XP بالأحداث ----
 (function hookXPEvents() {
     const _origCycleTask = window.cycleTaskStatus;
-    window.cycleTaskStatus = function (planId, groupId, taskId) {
-        const found = findTask(planId, groupId, taskId);
-        const wasDone = found?.task?.status === 'done';
-        _origCycleTask(planId, groupId, taskId);
-        if (found?.task?.status === 'done' && !wasDone) {
-            XPSystem.addXP(XPSystem.xpRewards.taskDone, 'إكمال مهمة');
-        }
-    };
+    if (typeof _origCycleTask === 'function') {
+        window.cycleTaskStatus = function (planId, groupId, taskId) {
+            const found = findTask(planId, groupId, taskId);
+            const wasDone = found?.task?.status === 'done';
+            _origCycleTask(planId, groupId, taskId);
+            if (found?.task?.status === 'done' && !wasDone) {
+                XPSystem.addXP(XPSystem.xpRewards.taskDone, 'إكمال مهمة');
+            }
+        };
+    }
 
     const _origSaveJournalEntry = window.saveJournalEntry;
-    window.saveJournalEntry = function () {
-        const before = (data.journalEntries || []).length;
-        _origSaveJournalEntry();
-        if ((data.journalEntries || []).length > before) {
-            XPSystem.addXP(XPSystem.xpRewards.journalEntry, 'إدخال يومية');
-        }
-    };
+    if (typeof _origSaveJournalEntry === 'function') {
+        window.saveJournalEntry = function () {
+            const before = (data.journalEntries || []).length;
+            _origSaveJournalEntry();
+            if ((data.journalEntries || []).length > before) {
+                XPSystem.addXP(XPSystem.xpRewards.journalEntry, 'إدخال يومية');
+            }
+        };
+    }
 })();
 
 // =============================================================
@@ -210,6 +189,7 @@ const HabitTracker = {
             name,
             icon: document.getElementById('habit-icon')?.value || '📖',
             log: {},
+            bestStreak: 0,
             createdAt: new Date().toISOString()
         });
         save();
@@ -228,13 +208,19 @@ const HabitTracker = {
         } else {
             habit.log[dateStr] = true;
             XPSystem.addXP(XPSystem.xpRewards.habitCheck, 'تحقيق عادة');
-            updateStreak();
+            if (typeof updateStreak === 'function') updateStreak();
         }
+
+        // تحديث أطول سلسلة
+        const currentStreak = this.getCurrentStreak(habit);
+        const bestStreak = this.getBestStreak(habit);
+        habit.bestStreak = Math.max(habit.bestStreak || 0, bestStreak, currentStreak);
+
         save();
         this.renderPage(document.getElementById('content'));
     },
 
-    getStreak(habit) {
+    getCurrentStreak(habit) {
         let streak = 0;
         const today = new Date();
         for (let i = 0; i < 365; i++) {
@@ -245,6 +231,31 @@ const HabitTracker = {
             else break;
         }
         return streak;
+    },
+
+    getBestStreak(habit) {
+        if (!habit.log) return 0;
+        const dates = Object.keys(habit.log).sort();
+        if (dates.length === 0) return 0;
+
+        let best = 1, current = 1;
+        for (let i = 1; i < dates.length; i++) {
+            const prev = new Date(dates[i - 1]);
+            const curr = new Date(dates[i]);
+            const diffDays = Math.round((curr - prev) / 86400000);
+            if (diffDays === 1) {
+                current++;
+                best = Math.max(best, current);
+            } else {
+                current = 1;
+            }
+        }
+        return Math.max(best, current);
+    },
+
+    // للتوافق مع الكود القديم
+    getStreak(habit) {
+        return this.getCurrentStreak(habit);
     },
 
     deleteHabit(habitId) {
@@ -283,14 +294,15 @@ const HabitTracker = {
             ` : `
                 <div class="habits-grid">
                     ${data.habits.map(habit => {
-                        const streak = this.getStreak(habit);
+                        const currentStreak = this.getCurrentStreak(habit);
+                        const bestStreak = Math.max(habit.bestStreak || 0, this.getBestStreak(habit));
                         const totalChecks = Object.keys(habit.log || {}).length;
                         return `
                             <div class="habit-card">
                                 <div class="habit-header">
                                     <span class="habit-name">${habit.icon} ${habit.name}</span>
                                     <div style="display:flex;align-items:center;gap:0.3rem">
-                                        ${streak > 0 ? `<span class="habit-streak">🔥 ${streak}</span>` : ''}
+                                        ${currentStreak > 0 ? `<span class="habit-streak">🔥 ${currentStreak}</span>` : ''}
                                         <button class="task-btn delete" onclick="HabitTracker.deleteHabit('${habit.id}')">✕</button>
                                     </div>
                                 </div>
@@ -308,7 +320,8 @@ const HabitTracker = {
                                 </div>
                                 <div class="habit-mini-stats">
                                     <span>📊 ${totalChecks} يوم</span>
-                                    <span>🔥 أطول سلسلة: ${streak}</span>
+                                    <span>🔥 السلسلة الحالية: ${currentStreak}</span>
+                                    <span>🏆 أطول سلسلة: ${bestStreak}</span>
                                 </div>
                             </div>
                         `;
@@ -358,13 +371,15 @@ const Countdowns = {
             id: uid(), name, date,
             icon: document.getElementById('cd-icon')?.value || '🎯'
         });
-        save(); closeModal();
+        save();
+        closeModal();
         this.renderPage(document.getElementById('content'));
     },
 
     delete(id) {
         data.countdowns = data.countdowns.filter(c => c.id !== id);
-        save(); this.renderPage(document.getElementById('content'));
+        save();
+        this.renderPage(document.getElementById('content'));
     },
 
     _calcRemaining(dateStr) {
@@ -388,29 +403,34 @@ const Countdowns = {
                 <button class="btn btn-primary btn-sm" onclick="Countdowns.add()">+ جديد</button>
             </div>
             ${data.countdowns.length === 0 ? `
-                <div class="empty-state"><div class="icon">⏰</div><p>لا يوجد عد تنازلي</p>
-                    <button class="btn btn-primary" onclick="Countdowns.add()">+ إضافة</button></div>
-            ` : `<div class="countdown-grid">
-                ${data.countdowns.map(cd => {
-                    const r = this._calcRemaining(cd.date);
-                    const urgent = !r.expired && r.days < 3;
-                    return `
-                        <div class="countdown-card ${r.expired ? 'expired' : ''} ${urgent ? 'urgent' : ''}">
-                            <button class="task-btn delete" style="position:absolute;top:0.5rem;left:0.5rem" onclick="Countdowns.delete('${cd.id}')">✕</button>
-                            <div class="countdown-icon">${cd.icon}</div>
-                            <div class="countdown-name">${cd.name}</div>
-                            <div class="countdown-date">${new Date(cd.date).toLocaleDateString('ar-EG',{year:'numeric',month:'long',day:'numeric'})}</div>
-                            <div class="countdown-numbers">
-                                ${r.expired ? '<div class="countdown-unit"><div class="countdown-value">✅</div><div class="countdown-label">انتهى!</div></div>' : `
-                                    <div class="countdown-unit"><div class="countdown-value">${r.days}</div><div class="countdown-label">يوم</div></div>
-                                    <div class="countdown-unit"><div class="countdown-value">${r.hours}</div><div class="countdown-label">ساعة</div></div>
-                                    <div class="countdown-unit"><div class="countdown-value">${r.mins}</div><div class="countdown-label">دقيقة</div></div>
-                                `}
+                <div class="empty-state">
+                    <div class="icon">⏰</div>
+                    <p>لا يوجد عد تنازلي</p>
+                    <button class="btn btn-primary" onclick="Countdowns.add()">+ إضافة</button>
+                </div>
+            ` : `
+                <div class="countdown-grid">
+                    ${data.countdowns.map(cd => {
+                        const r = this._calcRemaining(cd.date);
+                        const urgent = !r.expired && r.days < 3;
+                        return `
+                            <div class="countdown-card ${r.expired ? 'expired' : ''} ${urgent ? 'urgent' : ''}">
+                                <button class="task-btn delete" style="position:absolute;top:0.5rem;left:0.5rem" onclick="Countdowns.delete('${cd.id}')">✕</button>
+                                <div class="countdown-icon">${cd.icon}</div>
+                                <div class="countdown-name">${cd.name}</div>
+                                <div class="countdown-date">${new Date(cd.date).toLocaleDateString('ar-EG',{year:'numeric',month:'long',day:'numeric'})}</div>
+                                <div class="countdown-numbers">
+                                    ${r.expired ? '<div class="countdown-unit"><div class="countdown-value">✅</div><div class="countdown-label">انتهى!</div></div>' : `
+                                        <div class="countdown-unit"><div class="countdown-value">${r.days}</div><div class="countdown-label">يوم</div></div>
+                                        <div class="countdown-unit"><div class="countdown-value">${r.hours}</div><div class="countdown-label">ساعة</div></div>
+                                        <div class="countdown-unit"><div class="countdown-value">${r.mins}</div><div class="countdown-label">دقيقة</div></div>
+                                    `}
+                                </div>
                             </div>
-                        </div>
-                    `;
-                }).join('')}
-            </div>`}
+                        `;
+                    }).join('')}
+                </div>
+            `}
         `;
     }
 };
@@ -429,10 +449,11 @@ const StickyNotes = {
                 <label>النص</label>
                 <textarea id="sn-text" class="journal-textarea" style="min-height:80px" placeholder="اكتب ملاحظتك..."></textarea>
                 <label>اللون</label>
-                <div style="display:flex;gap:0.4rem">
-                    ${this.colors.map(c => `
-                        <div class="sticky-note ${c}" style="width:36px;height:36px;min-height:auto;cursor:pointer;border-radius:50%;display:flex;align-items:center;justify-content:center"
-                             onclick="document.getElementById('sn-color').value='${c}';document.querySelectorAll('.sticky-note[style]').forEach(e=>e.style.border='');this.style.border='3px solid var(--text)'">
+                <div style="display:flex;gap:0.4rem" id="sn-color-picker">
+                    ${this.colors.map((c, i) => `
+                        <div class="sticky-note ${c}"
+                             style="width:36px;height:36px;min-height:auto;cursor:pointer;border-radius:50%;display:flex;align-items:center;justify-content:center;${i === 0 ? 'border:3px solid var(--text)' : ''}"
+                             onclick="document.getElementById('sn-color').value='${c}';document.querySelectorAll('#sn-color-picker .sticky-note').forEach(e=>e.style.border='');this.style.border='3px solid var(--text)'">
                         </div>
                     `).join('')}
                 </div>
@@ -454,12 +475,15 @@ const StickyNotes = {
             color: document.getElementById('sn-color')?.value || 'yellow',
             createdAt: new Date().toISOString()
         });
-        save(); closeModal(); render();
+        save();
+        closeModal();
+        render();
     },
 
     delete(id) {
         data.stickyNotes = data.stickyNotes.filter(n => n.id !== id);
-        save(); render();
+        save();
+        render();
     },
 
     edit(id) {
@@ -477,8 +501,11 @@ const StickyNotes = {
     _saveEdit(id) {
         const note = data.stickyNotes.find(n => n.id === id);
         if (!note) return;
-        note.text = document.getElementById('sn-edit')?.value || note.text;
-        save(); closeModal(); render();
+        const newText = document.getElementById('sn-edit')?.value?.trim();
+        if (newText) note.text = newText;
+        save();
+        closeModal();
+        render();
     },
 
     renderSection() {
@@ -578,7 +605,7 @@ const PlanTemplates = {
                         <div class="template-meta">
                             <span>⏱️ ${t.duration}</span>
                             <span>📂 ${t.groups.length} مجموعات</span>
-                            <span>📝 ${t.groups.reduce((s,g) => s + g.tasks.length, 0)} مهمة</span>
+                            <span>📝 ${t.groups.reduce((sum, g) => sum + g.tasks.length, 0)} مهمة</span>
                         </div>
                     </div>
                 `).join('')}
@@ -594,16 +621,33 @@ const PlanTemplates = {
             id: uid(),
             name: tpl.name,
             icon: tpl.icon,
+            templateId: tpl.id,
             groups: tpl.groups.map(g => ({
                 id: uid(),
                 name: g.name,
                 collapsed: false,
-                tasks: g.tasks.map(t => ({
-                    id: uid(), name: t, status: 'pending',
-                    date: '', subs: [], notes: '', tags: [], links: []
-                }))
+                tasks: g.tasks.map(t => {
+                    // دعم المهام النصية والكائنات
+                    const isObject = typeof t === 'object' && t !== null;
+                    return {
+                        id: uid(),
+                        name: isObject ? (t.title || t.name || '') : t,
+                        file: isObject ? (t.file || null) : null,
+                        status: 'pending',
+                        date: '',
+                        subs: [],
+                        notes: '',
+                        tags: [],
+                        links: []
+                    };
+                })
             }))
         };
+
+        // نسخ rootPath إذا وُجد
+        if (tpl.rootPath) {
+            plan.rootPath = tpl.rootPath;
+        }
 
         data.plans.push(plan);
         save();
@@ -620,8 +664,13 @@ const PlanTemplates = {
 const WeeklyCompare = {
     render() {
         const now = new Date();
+        // بداية الأسبوع: السبت (لدعم التقويم العربي)
+        const dayOfWeek = now.getDay();
+        const diffToSat = (dayOfWeek + 1) % 7; // السبت = 6, الأحد = 0, ...
         const thisWeekStart = new Date(now);
-        thisWeekStart.setDate(now.getDate() - now.getDay());
+        thisWeekStart.setDate(now.getDate() - diffToSat);
+        thisWeekStart.setHours(0, 0, 0, 0);
+
         const lastWeekStart = new Date(thisWeekStart);
         lastWeekStart.setDate(lastWeekStart.getDate() - 7);
 
@@ -687,32 +736,35 @@ const WeeklyCompare = {
 
 const AdvancedCharts = {
     renderPieChart() {
-        const s = getStats();
+        const stats = getStats();
+        const remaining = stats.totalTasks - stats.doneTasks - (stats.postponedTasks || 0);
         const slices = [
-            { label: 'مكتمل', value: s.doneTasks, color: '#059669' },
-            { label: 'مؤجل', value: s.postponedTasks, color: '#d97706' },
-            { label: 'متبقي', value: s.totalTasks - s.doneTasks - s.postponedTasks, color: '#6b7280' }
-        ].filter(s => s.value > 0);
+            { label: 'مكتمل', value: stats.doneTasks, color: '#059669' },
+            { label: 'مؤجل', value: stats.postponedTasks || 0, color: '#d97706' },
+            { label: 'متبقي', value: Math.max(0, remaining), color: '#6b7280' }
+        ].filter(sl => sl.value > 0);
 
-        const total = slices.reduce((s, sl) => s + sl.value, 0);
+        const total = slices.reduce((sum, sl) => sum + sl.value, 0);
 
         return `
             <div class="card">
                 <div class="card-title">📊 توزيع المهام</div>
-                <div class="chart-canvas-wrapper">
-                    <div class="pie-chart-container">
-                        <canvas id="pie-canvas" width="200" height="200"></canvas>
-                        <div class="pie-chart-center">${total}</div>
-                    </div>
-                </div>
-                <div class="pie-legend">
-                    ${slices.map(s => `
-                        <div class="pie-legend-item">
-                            <div class="pie-legend-dot" style="background:${s.color}"></div>
-                            <span>${s.label}: ${s.value} (${Math.round(s.value/total*100)}%)</span>
+                ${total === 0 ? '<p style="text-align:center;color:var(--text-secondary)">لا توجد مهام بعد</p>' : `
+                    <div class="chart-canvas-wrapper">
+                        <div class="pie-chart-container">
+                            <canvas id="pie-canvas" width="200" height="200"></canvas>
+                            <div class="pie-chart-center">${total}</div>
                         </div>
-                    `).join('')}
-                </div>
+                    </div>
+                    <div class="pie-legend">
+                        ${slices.map(sl => `
+                            <div class="pie-legend-item">
+                                <div class="pie-legend-dot" style="background:${sl.color}"></div>
+                                <span>${sl.label}: ${sl.value} (${total > 0 ? Math.round(sl.value / total * 100) : 0}%)</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `}
             </div>
         `;
     },
@@ -721,19 +773,23 @@ const AdvancedCharts = {
         const canvas = document.getElementById('pie-canvas');
         if (!canvas) return;
         const ctx = canvas.getContext('2d');
-        const s = getStats();
+        const stats = getStats();
 
+        const remaining = stats.totalTasks - stats.doneTasks - (stats.postponedTasks || 0);
         const slices = [
-            { value: s.doneTasks, color: '#059669' },
-            { value: s.postponedTasks, color: '#d97706' },
-            { value: s.totalTasks - s.doneTasks - s.postponedTasks, color: '#6b7280' }
-        ].filter(s => s.value > 0);
+            { value: stats.doneTasks, color: '#059669' },
+            { value: stats.postponedTasks || 0, color: '#d97706' },
+            { value: Math.max(0, remaining), color: '#6b7280' }
+        ].filter(sl => sl.value > 0);
 
-        const total = slices.reduce((s, sl) => s + sl.value, 0);
+        const total = slices.reduce((sum, sl) => sum + sl.value, 0);
         if (total === 0) return;
 
         const cx = 100, cy = 100, r = 85;
         let startAngle = -Math.PI / 2;
+
+        // مسح الكانفاس
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         slices.forEach(slice => {
             const angle = (slice.value / total) * Math.PI * 2;
@@ -746,10 +802,11 @@ const AdvancedCharts = {
             startAngle += angle;
         });
 
-        // وسط أبيض
+        // وسط شفاف يتبع لون الخلفية
         ctx.beginPath();
         ctx.arc(cx, cy, 50, 0, Math.PI * 2);
-        ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--bg-card').trim() || '#fff';
+        const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-card').trim();
+        ctx.fillStyle = bgColor || '#ffffff';
         ctx.fill();
     }
 };
@@ -760,8 +817,8 @@ const AdvancedCharts = {
 
 const PDFExport = {
     generate() {
-        const s = getStats();
-        const pct = s.totalTasks ? Math.round(s.doneTasks / s.totalTasks * 100) : 0;
+        const stats = getStats();
+        const pct = stats.totalTasks ? Math.round(stats.doneTasks / stats.totalTasks * 100) : 0;
 
         openModal('📄 تصدير تقرير', `
             <div class="pdf-preview" id="pdf-content">
@@ -772,24 +829,29 @@ const PDFExport = {
 
                 <div class="pdf-section">
                     <h3>📊 ملخص عام</h3>
-                    <p>التقدم: ${pct}% | المهام: ${s.doneTasks}/${s.totalTasks} | السلسلة: ${data.streak} يوم | الوقت: ${Math.round(s.totalPomodoroMins/60)} ساعة</p>
+                    <p>التقدم: ${pct}% | المهام: ${stats.doneTasks}/${stats.totalTasks} | السلسلة: ${data.streak || 0} يوم | الوقت: ${Math.round((stats.totalPomodoroMins || 0) / 60)} ساعة</p>
                 </div>
 
                 <div class="pdf-section">
                     <h3>📋 الخطط</h3>
-                    ${data.plans.map(p => {
+                    ${(data.plans || []).map(p => {
                         let t = 0, d = 0;
-                        p.groups.forEach(g => g.tasks.forEach(task => { t++; if (task.status === 'done') d++; }));
-                        return `<p>${p.icon} ${p.name}: ${t ? Math.round(d/t*100) : 0}% (${d}/${t})</p>`;
+                        (p.groups || []).forEach(g => (g.tasks || []).forEach(task => { t++; if (task.status === 'done') d++; }));
+                        return `<p>${p.icon || '📋'} ${p.name}: ${t ? Math.round(d / t * 100) : 0}% (${d}/${t})</p>`;
                     }).join('')}
                 </div>
 
                 <div class="pdf-section">
                     <h3>🛠️ المشاريع</h3>
-                    ${data.projects.map(p => {
-                        const d = p.phases.filter(ph => ph.status === 'done').length;
-                        return `<p>${p.icon} ${p.name}: ${d}/${p.phases.length}</p>`;
+                    ${(data.projects || []).map(p => {
+                        const d = (p.phases || []).filter(ph => ph.status === 'done').length;
+                        return `<p>${p.icon || '🛠️'} ${p.name}: ${d}/${(p.phases || []).length}</p>`;
                     }).join('')}
+                </div>
+
+                <div class="pdf-section">
+                    <h3>🎮 المستوى</h3>
+                    <p>${XPSystem.getCurrentLevel().icon} ${XPSystem.getCurrentLevel().name} - المستوى ${XPSystem.getCurrentLevel().level} (${XPSystem.getTotal()} XP)</p>
                 </div>
             </div>
             <div style="display:flex;gap:0.5rem;margin-top:1rem">
@@ -802,17 +864,27 @@ const PDFExport = {
     print() {
         const content = document.getElementById('pdf-content')?.innerHTML;
         if (!content) return;
+
         const win = window.open('', '_blank');
+        if (!win) {
+            toast('تعذر فتح نافذة الطباعة. تحقق من إعدادات حظر النوافذ المنبثقة.', 'error');
+            return;
+        }
+
         win.document.write(`
             <html dir="rtl"><head><title>تقرير رحلة التعلم</title>
-            <style>body{font-family:sans-serif;padding:2rem;color:#1f2937;line-height:1.8}
-            h3{color:#4f46e5;border-bottom:1px solid #e5e7eb;padding-bottom:0.3rem}
-            .pdf-header{text-align:center;margin-bottom:2rem;border-bottom:2px solid #4f46e5;padding-bottom:1rem}
-            .pdf-title{font-size:1.5rem;font-weight:800;color:#4f46e5}</style></head>
+            <style>
+                body{font-family:'Segoe UI',Tahoma,sans-serif;padding:2rem;color:#1f2937;line-height:1.8}
+                h3{color:#4f46e5;border-bottom:1px solid #e5e7eb;padding-bottom:0.3rem;margin-top:1.5rem}
+                .pdf-header{text-align:center;margin-bottom:2rem;border-bottom:2px solid #4f46e5;padding-bottom:1rem}
+                .pdf-title{font-size:1.5rem;font-weight:800;color:#4f46e5}
+                .pdf-date{color:#6b7280;margin-top:0.5rem}
+                p{margin:0.3rem 0}
+            </style></head>
             <body>${content}</body></html>
         `);
         win.document.close();
-        win.print();
+        setTimeout(() => win.print(), 300);
     }
 };
 
@@ -831,15 +903,21 @@ const KanbanBoard = {
             postponed: { title: '⏸ مؤجل', tasks: [] }
         };
 
-        data.plans.forEach(plan => {
-            plan.groups.forEach(group => {
-                group.tasks.forEach(task => {
-                    const status = task.status === 'done' ? 'done' : task.status === 'postponed' ? 'postponed' : 'pending';
+        (data.plans || []).forEach(plan => {
+            (plan.groups || []).forEach(group => {
+                (group.tasks || []).forEach(task => {
+                    let status;
+                    switch (task.status) {
+                        case 'done': status = 'done'; break;
+                        case 'postponed': status = 'postponed'; break;
+                        case 'active': status = 'active'; break;
+                        default: status = 'pending';
+                    }
                     cols[status].tasks.push({
                         ...task,
                         planId: plan.id,
                         groupId: group.id,
-                        planIcon: plan.icon,
+                        planIcon: plan.icon || '📋',
                         planName: plan.name
                     });
                 });
@@ -852,7 +930,7 @@ const KanbanBoard = {
     renderPage(c) {
         const cols = this.getColumns();
 
-                c.innerHTML = `
+        c.innerHTML = `
             <div class="section-header">
                 <h2>🗂️ لوحة Kanban</h2>
                 <div style="display:flex;gap:0.5rem">
@@ -883,7 +961,7 @@ const KanbanBoard = {
                                     <div class="kanban-card-meta">
                                         <span class="badge badge-tag">${task.planIcon} ${task.planName.substring(0, 15)}</span>
                                         ${task.date ? `<span class="badge badge-date">📅 ${formatDate(task.date)}</span>` : ''}
-                                        ${(task.subs || []).length > 0 ? `<span class="badge badge-count">📝 ${task.subs.filter(s=>s.status==='done').length}/${task.subs.length}</span>` : ''}
+                                        ${(task.subs || []).length > 0 ? `<span class="badge badge-count">📝 ${task.subs.filter(sub => sub.status === 'done').length}/${task.subs.length}</span>` : ''}
                                     </div>
                                 </div>
                             `).join('')}
@@ -913,22 +991,26 @@ const KanbanBoard = {
         if (!this.dragCard) return;
 
         const found = findTask(this.dragCard.planId, this.dragCard.groupId, this.dragCard.taskId);
-        if (!found || !found.task) return;
+        if (!found || !found.task) { this.dragCard = null; return; }
 
+        const oldStatus = found.task.status;
+
+        // الآن Kanban يدعم active فعلياً
         const statusMap = {
             'pending': 'pending',
-            'active': 'pending',
+            'active': 'active',
             'done': 'done',
             'postponed': 'postponed'
         };
 
-        const oldStatus = found.task.status;
         found.task.status = statusMap[newStatus] || 'pending';
 
         if (found.task.status === 'done' && oldStatus !== 'done') {
-            updateStreak();
+            if (typeof updateStreak === 'function') updateStreak();
             XPSystem.addXP(XPSystem.xpRewards.taskDone, 'إكمال مهمة من Kanban');
-            Achievements.checkAndNotify();
+            if (typeof Achievements !== 'undefined' && Achievements.checkAndNotify) {
+                Achievements.checkAndNotify();
+            }
         }
 
         save();
@@ -971,7 +1053,8 @@ const KanbanBoard = {
                 document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
                 btn.classList.add('active');
                 b.handler();
-                document.getElementById('sidebar').classList.remove('open');
+                const sidebar = document.getElementById('sidebar');
+                if (sidebar) sidebar.classList.remove('open');
             };
             otherDiv.parentNode.insertBefore(btn, otherDiv);
         });
@@ -981,18 +1064,22 @@ const KanbanBoard = {
     observer.observe(document.body, { childList: true, subtree: true });
     setTimeout(addButtons, 800);
 })();
+
 // =============================================================
-//  🔌 ربط بالـ render router
+//  🔌 ربط بالـ render router (مرة واحدة فقط)
 // =============================================================
 
 (function patchRenderV33() {
     const _origRender = window.render;
+    if (typeof _origRender !== 'function') return;
+
     window.render = function () {
         _origRender();
 
         const c = document.getElementById('content');
         if (!c) return;
 
+        // التوجيه للأقسام الإضافية
         switch (currentView) {
             case 'habits':
                 HabitTracker.renderPage(c);
@@ -1004,15 +1091,24 @@ const KanbanBoard = {
                 KanbanBoard.renderPage(c);
                 break;
         }
+
+        // رسم Pie Chart إذا كان الكانفاس موجوداً
+        setTimeout(() => {
+            if (document.getElementById('pie-canvas')) {
+                AdvancedCharts.drawPie();
+            }
+        }, 200);
     };
 })();
 
 // =============================================================
-//  🔌 ربط بالداشبورد
+//  🔌 ربط بالداشبورد (تكملة)
 // =============================================================
 
 (function patchDashboardV33() {
     const _origDashboard = window.renderDashboard;
+    if (typeof _origDashboard !== 'function') return;
+
     window.renderDashboard = function (c) {
         _origDashboard(c);
 
@@ -1051,14 +1147,14 @@ const KanbanBoard = {
             const habitsHtml = `
                 <div class="card" style="margin-bottom:1rem">
                     <div class="card-header">
-                        <div class="card-title" style="cursor:pointer" onclick="currentView='habits';render();HabitTracker.renderPage(document.getElementById('content'))">
+                        <div class="card-title" style="cursor:pointer" onclick="currentView='habits';render();">
                             ✅ العادات اليومية
                             <span style="font-size:0.75rem;color:var(--primary);margin-right:0.5rem">عرض الكل ←</span>
                         </div>
                     </div>
                     <div class="habits-grid" style="grid-template-columns:repeat(auto-fill,minmax(250px,1fr))">
                         ${data.habits.slice(0, 4).map(habit => {
-                            const streak = HabitTracker.getStreak(habit);
+                            const streak = HabitTracker.getCurrentStreak(habit);
                             return `
                                 <div class="habit-card" style="padding:0.75rem">
                                     <div class="habit-header" style="margin-bottom:0.5rem">
@@ -1094,28 +1190,34 @@ const KanbanBoard = {
                 return !r.expired && r.days <= 30;
             });
 
-            if (urgentCountdowns.length > 0 && achievementsCard) {
-                const cdHtml = `
-                    <div class="card" style="margin-bottom:1rem">
-                        <div class="card-title">⏰ قادم قريباً</div>
-                        <div class="countdown-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">
-                            ${urgentCountdowns.slice(0, 3).map(cd => {
-                                const r = Countdowns._calcRemaining(cd.date);
-                                return `
-                                    <div class="countdown-card ${r.days < 3 ? 'urgent' : ''}" style="padding:0.85rem">
-                                        <div class="countdown-icon" style="font-size:1.3rem">${cd.icon}</div>
-                                        <div class="countdown-name" style="font-size:0.85rem">${cd.name}</div>
-                                        <div class="countdown-numbers" style="gap:0.5rem">
-                                            <div class="countdown-unit"><div class="countdown-value" style="font-size:1.3rem">${r.days}</div><div class="countdown-label">يوم</div></div>
-                                            <div class="countdown-unit"><div class="countdown-value" style="font-size:1.3rem">${r.hours}</div><div class="countdown-label">ساعة</div></div>
+            if (urgentCountdowns.length > 0) {
+                const insertTarget = achievementsCard || c.querySelector('.card:last-child');
+                if (insertTarget) {
+                    const cdHtml = `
+                        <div class="card" style="margin-bottom:1rem">
+                            <div class="card-title" style="cursor:pointer" onclick="currentView='countdowns';render();">
+                                ⏰ قادم قريباً
+                                <span style="font-size:0.75rem;color:var(--primary);margin-right:0.5rem">عرض الكل ←</span>
+                            </div>
+                            <div class="countdown-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">
+                                ${urgentCountdowns.slice(0, 3).map(cd => {
+                                    const r = Countdowns._calcRemaining(cd.date);
+                                    return `
+                                        <div class="countdown-card ${r.days < 3 ? 'urgent' : ''}" style="padding:0.85rem">
+                                            <div class="countdown-icon" style="font-size:1.3rem">${cd.icon}</div>
+                                            <div class="countdown-name" style="font-size:0.85rem">${cd.name}</div>
+                                            <div class="countdown-numbers" style="gap:0.5rem">
+                                                <div class="countdown-unit"><div class="countdown-value" style="font-size:1.3rem">${r.days}</div><div class="countdown-label">يوم</div></div>
+                                                <div class="countdown-unit"><div class="countdown-value" style="font-size:1.3rem">${r.hours}</div><div class="countdown-label">ساعة</div></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                `;
-                            }).join('')}
+                                    `;
+                                }).join('')}
+                            </div>
                         </div>
-                    </div>
-                `;
-                achievementsCard.insertAdjacentHTML('beforebegin', cdHtml);
+                    `;
+                    insertTarget.insertAdjacentHTML('beforebegin', cdHtml);
+                }
             }
         }
 
@@ -1133,6 +1235,8 @@ const KanbanBoard = {
 
 (function patchStatsV33() {
     const _origStats = window.renderStatsPage;
+    if (typeof _origStats !== 'function') return;
+
     window.renderStatsPage = function (c) {
         _origStats(c);
 
@@ -1173,16 +1277,48 @@ const KanbanBoard = {
             </div>
         `);
 
+        // Habit Stats
+        if (data.habits && data.habits.length > 0) {
+            const totalDays = data.habits.reduce((sum, h) => sum + Object.keys(h.log || {}).length, 0);
+            const avgPerHabit = data.habits.length > 0 ? Math.round(totalDays / data.habits.length) : 0;
+
+            c.insertAdjacentHTML('beforeend', `
+                <div class="card">
+                    <div class="card-title">✅ إحصائيات العادات</div>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:0.5rem;text-align:center">
+                        <div style="padding:0.5rem;background:var(--bg);border-radius:8px">
+                            <div style="font-size:1.5rem;font-weight:800">${data.habits.length}</div>
+                            <div style="font-size:0.75rem;color:var(--text-secondary)">عادات نشطة</div>
+                        </div>
+                        <div style="padding:0.5rem;background:var(--bg);border-radius:8px">
+                            <div style="font-size:1.5rem;font-weight:800">${totalDays}</div>
+                            <div style="font-size:0.75rem;color:var(--text-secondary)">إجمالي الأيام</div>
+                        </div>
+                        <div style="padding:0.5rem;background:var(--bg);border-radius:8px">
+                            <div style="font-size:1.5rem;font-weight:800">${avgPerHabit}</div>
+                            <div style="font-size:0.75rem;color:var(--text-secondary)">متوسط لكل عادة</div>
+                        </div>
+                    </div>
+                </div>
+            `);
+        }
+
         // رسم Pie Chart
         setTimeout(() => AdvancedCharts.drawPie(), 100);
     };
 })();
+
 // =============================================================
 //  🔌 ربط قوالب الخطط بزر "خطة جديدة"
 // =============================================================
 
 (function patchNewPlan() {
     const _origAddNewPlan = window.addNewPlan;
+    if (typeof _origAddNewPlan !== 'function') return;
+
+    // حفظ مرجع آمن للدالة الأصلية
+    const safeOrigAddNewPlan = _origAddNewPlan;
+
     window.addNewPlan = function () {
         openModal('📚 خطة جديدة', `
             <div style="display:flex;flex-direction:column;gap:1rem">
@@ -1190,13 +1326,16 @@ const KanbanBoard = {
                     <div class="card-title">📋 من قالب جاهز</div>
                     <p style="font-size:0.82rem;color:var(--text-secondary)">اختر من قوالب Python, ML, Web Dev والمزيد</p>
                 </div>
-                <div class="card" style="cursor:pointer" onclick="closeModal();setTimeout(function(){(${_origAddNewPlan.toString()})()},100)">
+                <div class="card" style="cursor:pointer" onclick="closeModal();window.__origAddNewPlan()">
                     <div class="card-title">✏️ خطة فارغة</div>
                     <p style="font-size:0.82rem;color:var(--text-secondary)">ابدأ من الصفر وأنشئ خطتك الخاصة</p>
                 </div>
             </div>
         `);
     };
+
+    // حفظ الدالة الأصلية على window لاستدعائها من onclick
+    window.__origAddNewPlan = safeOrigAddNewPlan;
 })();
 
 // =============================================================
@@ -1209,7 +1348,6 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
         currentView = 'habits';
         render();
-        HabitTracker.renderPage(document.getElementById('content'));
     }
 
     // Alt + T = قوالب
@@ -1223,7 +1361,6 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
         currentView = 'kanban';
         render();
-        KanbanBoard.renderPage(document.getElementById('content'));
     }
 
     // Alt + E = تصدير PDF
@@ -1231,184 +1368,499 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
         PDFExport.generate();
     }
+
+    // Alt + N = ملاحظة لاصقة جديدة
+    if (e.altKey && e.key === 'n') {
+        e.preventDefault();
+        StickyNotes.add();
+    }
 });
 
 // =============================================================
 //  تحديث العد التنازلي كل دقيقة
 // =============================================================
-setInterval(() => {
+const _countdownInterval = setInterval(() => {
     if (currentView === 'countdowns') {
-        Countdowns.renderPage(document.getElementById('content'));
+        const c = document.getElementById('content');
+        if (c) Countdowns.renderPage(c);
     }
 }, 60000);
 
 // =============================================================
-//  ضمان رسم Pie Chart بعد كل render
+//  🔥 AI ENGINEER MASTERY – LLM & RAG (24 أسبوع) – النسخة المُصلّحة
 // =============================================================
-const _origRenderFinal = window.render;
-window.render = function () {
-    _origRenderFinal();
-    setTimeout(() => {
-        if (document.getElementById('pie-canvas')) {
-            AdvancedCharts.drawPie();
-        }
-    }, 200);
-};
-// =============================================================
-//  🔥 AI ENGINEER MASTERY – LLM & RAG FROM SCRATCH (24 أسبوع)
-//  الخطة الكاملة التي طلبتها مع أسماء الملفات بالضبط من الـ tree
-// =============================================================
+PlanTemplates.templates = PlanTemplates.templates.filter(t => t.id !== 'tpl_ai_engineer_full');
+
 PlanTemplates.templates.unshift({
     id: 'tpl_ai_engineer_full',
     name: '🤖 AI Engineer Mastery – LLM & RAG',
     icon: '🤖',
-    desc: 'من الصفر إلى مهندس ذكاء اصطناعي متخصص (LLMs + RAG + Production) - 24 أسبوع',
+    desc: 'خطة كاملة 24 أسبوع: رياضيات + ML + DL + LLMs + RAG + مشاريع',
     duration: '6 أشهر',
+    rootPath: '/Volumes/dt/AI-ENGINEER',
     groups: [
         {
-            name: 'أسابيع 1-4: الأساسيات (رياضيات + احتمال + إحصاء)',
+            name: 'أسابيع 1-2: أساسيات الرياضيات',
             tasks: [
-                'math 1/Functions [2SpgdHN5dKU].webm',
-                'math 1/Transformations of Functions [t644SoGQ4xU].webm',
-                'math 1/Absolute Function [v8WLmE2bGSQ].webm',
-                'math 1/Inverse Function [i2izH2b2PlY].webm',
-                'math 1/Trigonometric Functions [fzlWZ5KUM7A].webm',
-                'math 1/Exponential & Logarithmic [4xv6JSnnBno].webm',
-                'math 1/Hyperbolic Functions [5P5KOjTBr9Q].webm',
-                'math 1/Inverse Trigonometric [UwAqGDrowsY].webm',
-                'math 1/Inverse Hyperbolic [giJc5s6q2js].mkv',
-                'math 1/Limits L\'Hopital [jl_B8--XQS0].mkv',
-                'math 1/Basic Table and Rules of Differentiation [cfZGo5B3J6E].webm',
-                'math 1/Additional Notes on Differentiation [bDPmE0rzHyQ].mkv',
-                'math 1/Lecture03- Differentiation II [PNkvpZALu8E].webm',
-                'math 1/Lecture04- Inverse Function and Inverse Trigonometric [VuCHLzhz_io].mkv',
-                'math 1/Lecture 06 - Applications of Differentiation [0MWdUPosYh8].mkv',
-                'math 1/Selected applications of differentiation [qc7RC8OjYgQ].mkv',
-                'math 1/Introduction to integration(1) [aTh6710uaeY].webm',
-                'math 1/Introduction to integration (2) [D6ELbhq-xag].mkv',
-                'probability & stat/00- Statistical Analysis [CL-fAMiysnk].webm',
-                'probability & stat/01- Probability and Statistics [GmJJ2iZz08c].webm',
-                'probability & stat/02- Counting & Probability [NrdCDmSAn7c].webm',
-                'probability & stat/03- Rules& Conditional Probability [raeVQxzY7iE].webm',
-                'probability & stat/04- Bayes Rule & RV [zWDzNUTfk9s].webm',
-                'Coursera - Bayesian Statistics From Concept to Data Analysis (كامل)',
-                'Coursera - Bayesian Statistics Techniques and Models (كامل)',
-                'Coursera - Bayesian Statistics Mixture Models (كامل)',
-                'Coursera - Bayesian Statistics Time Series Analysis (كامل)'
+                { title: 'Functions', file: '01_Math_Basics/Functions [2SpgdHN5dKU].webm' },
+                { title: 'Transformations of Functions', file: '01_Math_Basics/Transformations of Functions \uFF1A Shifting, Scaling, Reflection, Absoluting [t644SoGQ4xU].webm' },
+                { title: 'Absolute Function - Even & Odd', file: '01_Math_Basics/Absolute Function - Even &Odd Functions [v8WLmE2bGSQ].webm' },
+                { title: 'Inverse Function', file: '01_Math_Basics/Inverse Function [i2izH2b2PlY].webm' },
+                { title: 'Trigonometric Functions', file: '01_Math_Basics/Trigonometric Functions - Part 01 [fzlWZ5KUM7A].webm' },
+                { title: 'Exponential & Logarithmic Functions', file: '01_Math_Basics/Exponential & Logarithmic Functions [4xv6JSnnBno].webm' },
+                { title: 'Hyperbolic Functions', file: '01_Math_Basics/Hyperbolic Functions [5P5KOjTBr9Q].webm' },
+                { title: 'Inverse Trigonometric Functions', file: '01_Math_Basics/Inverse Trigonometric Functions [UwAqGDrowsY].webm' },
+                { title: 'Inverse Hyperbolic Functions', file: '01_Math_Basics/Inverse Hyperbolic Functions [giJc5s6q2js].mkv' },
+                { title: 'Limits L\'Hopital\'s Rule', file: '01_Math_Basics/Limits L\'Hopital\'s Rule [jl_B8--XQS0].mkv' },
+                { title: 'Differentiation - Basic Rules', file: '01_Math_Basics/Basic Table and Rules of Differentiation - Imlicit & Parametric Differentiation [cfZGo5B3J6E].webm' },
+                { title: 'Additional Notes on Differentiation', file: '01_Math_Basics/Additional Notes on Differentation [bDPmE0rzHyQ].mkv' },
+                { title: 'Differentiation II', file: '01_Math_Basics/Lecture03- Differentiation II [PNkvpZALu8E].webm' },
+                { title: 'Inverse Trig Differentiation', file: '01_Math_Basics/Lecture04- Inverse Function and Inverse Trigonometric Functions [VuCHLzhz_io].mkv' },
+                { title: 'Applications of Differentiation', file: '01_Math_Basics/Lecture 06 - Applications of Differentiation [0MWdUPosYh8].mkv' },
+                { title: 'Selected Applications of Differentiation', file: '01_Math_Basics/Selected applications of differentiation [qc7RC8OjYgQ].mkv' },
+                { title: 'Introduction to Integration (1)', file: '01_Math_Basics/Introduction to integration(1) [aTh6710uaeY].webm' },
+                { title: 'Introduction to Integration (2)', file: '01_Math_Basics/Introduction to integration (2) [D6ELbhq-xag].mkv' }
             ]
         },
         {
-            name: 'أسابيع 5-7: Machine Learning أساسي (CS229 2022)',
+            name: 'أسابيع 3-4: الاحتمالات والإحصاء',
             tasks: [
-                '229/Stanford CS229 Machine Learning I Introduction I 2022 I Lecture 1 [Bl4Feh_Mjvo].webm',
-                '229/Stanford CS229 Machine Learning I Supervised learning setup, LMS I 2022 I Lecture 2 [gqKaVgQxEJ0].webm',
-                '229/Stanford CS229 Machine Learning I Weighted Least Squares, Logistic regression, Newton\'s Method I 2022 I Lecture 3 [k_pDh_68K6c].webm',
-                '229/Stanford CS229 Machine Learning I Exponential family, Generalized Linear Models I 2022 I Lecture 4 [goDDnBbJQ4g].mkv',
-                '229/Stanford CS229 Machine Learning I Gaussian discriminant analysis, Naive Bayes I 2022 I Lecture 5 [RMy_1mO4HLk].mkv',
-                '229/Stanford CS229 Machine Learning I Naive Bayes, Laplace Smoothing I 2022 I Lecture 6 [ADj95edZc0w].mkv',
-                '229/Stanford CS229 Machine Learning I Kernels I 2022 I Lecture 7 [dzDOqrac9Ks].mkv',
-                '229/Stanford CS229 Machine Learning I Neural Networks 1 I 2022 I Lecture 8 [ZMxfDWPXmjc].mkv',
-                '229/Stanford CS229 Machine Learning I Neural Networks 2 (backprop) I 2022 I Lecture 9 [UbtTv7j1tzU].mkv',
-                '229/Stanford CS229 Machine Learning I Bias - Variance, Regularization I 2022 I Lecture 10 [7AQYw5FOVcw].mkv',
-                '229/Stanford CS229 Machine Learning I Feature / Model selection, ML Advice I 2022 I Lecture 11 [NirZnqwYfYU].mkv'
+                { title: '00- مقدمة التحليل الإحصائي', file: '01_Probability_Statistics/00- Statistical Analysis \uFF5C \u0627\u0644\u0625\u062D\u0635\u0627\u0621 \u0645\u0634 \u0623\u0631\u0642\u0627\u0645 \u0648\u0628\u0633! ... \u0645\u0642\u062F\u0645\u0629 \u0645\u0628\u0633\u0637\u0629 \u0644\u0645\u062D\u062A\u0648\u0649 \u0645\u0627\u062F\u0629 \u0627\u0644\u062A\u062D\u0644\u064A\u0644 \u0627\u0644\u0625\u062D\u0635\u0627\u0626\u064A [CL-fAMiysnk].webm' },
+                { title: '01- Sample Space & Event', file: '01_Probability_Statistics/01- Probability and Statistics \uFF5C Sample Space & Event \uFF5C \u0627\u062D\u062A\u0645\u0627\u0644\u0627\u062A \u0648\u0625\u062D\u0635\u0627\u0621 \uFF5C \u0641\u0636\u0627\u0621 \u0627\u0644\u0639\u064A\u0646\u0629 \u0648\u0627\u0644\u062D\u062F\u062B [GmJJ2iZz08c].webm' },
+                { title: '02- Counting & Probability', file: '01_Probability_Statistics/02- Probability and Statistics \uFF5C Counting & Probability \uFF5C \u0627\u062D\u062A\u0645\u0627\u0644\u0627\u062A \u0648\u0625\u062D\u0635\u0627\u0621 \uFF5C \u062A\u0642\u0646\u064A\u0627\u062A \u0627\u0644\u0639\u062F \u0648\u0627\u0644\u0627\u062D\u062A\u0645\u0627\u0644 [NrdCDmSAn7c].webm' },
+                { title: '03- Conditional Probability', file: '01_Probability_Statistics/03- Probability and Statistics \uFF5C Rules& Conditional Probability \uFF5C \u0627\u062D\u062A\u0645\u0627\u0644\u0627\u062A \u0648\u0625\u062D\u0635\u0627\u0621 \uFF5C \u0627\u0644\u0627\u062D\u062A\u0645\u0627\u0644 \u0627\u0644\u0645\u0634\u0631\u0648\u0637 [raeVQxzY7iE].webm' },
+                { title: '04- Bayes Rule & RV', file: '01_Probability_Statistics/04- Probability and Statistics \uFF5C Bayes Rule & RV \uFF5C \u0627\u062D\u062A\u0645\u0627\u0644\u0627\u062A \u0648\u0625\u062D\u0635\u0627\u0621 \uFF5C \u0642\u0627\u0639\u062F\u0629 \u0628\u0627\u064A\u0632 \u0648\u0627\u0644\u0645\u062A\u063A\u064A\u0631\u0627\u062A \u0627\u0644\u0639\u0634\u0648\u0627\u0626\u064A\u0629 [zWDzNUTfk9s].webm' },
+                { title: 'Probability - Lecture 01 Introduction', file: '01_Probability/Lecture01 - Introduction to probability [aMK6hM7NeSk].webm' },
+                { title: 'Probability - Counting Part 01', file: '01_Probability/Lecture02 - Techniques of Counting - Part 01 [a-vqSmhugrI].webm' },
+                { title: 'Probability - Counting Part 02', file: '01_Probability/Lecture03 - Techniques of Counting - Part 02 [PFMMQR43a58].webm' },
+                { title: 'Probability - Conditional Probability', file: '01_Probability/Lecture04.1 - Conditional Probability [0psrQBB3p88].webm' },
+                { title: 'Probability - Independent Events', file: '01_Probability/Lecture04.2 - Independent Events [1RIL5-28FmU].webm' },
+                { title: 'Probability - Discrete RV PDF & CDF', file: '01_Probability/Lecture05 - Discret Random Variable PDF and CDF [6zfAYjbTr0g].webm' },
+                { title: 'Probability - Expectation & Variance', file: '01_Probability/Lecture06 - Expectation and variance and Moment generating function of discrete random variable [sb_gIwZXUds].webm' }
             ]
         },
         {
-            name: 'أسابيع 8-11: Deep Learning (CS230 + fast.ai + DS620)',
+            name: 'أسابيع 5-7: Machine Learning (CS229)',
             tasks: [
-                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 1 [PySo_6S4ZAg].webm',
-                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 2 [AwQHqWyHRpU].webm',
-                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 3 [JUJNGv_sb4Y].mkv',
-                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 4 [ANszao6YQuM].mkv',
-                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 5 [IM9ANAbufYM].mkv',
-                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 6 [G5FNYxbW_Qw].mkv',
-                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 7 [gCJCgQW_LKc].mkv',
-                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 8 [733m6qBH-jI].webm',
-                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 9 [NP2XqpgTJyo].mkv',
-                '230/Stanford CS230： Deep Learning ｜ Autumn 2018 ｜ Lecture 10 [IFLstgCNOA4].mkv',
-                'DL/Lesson 1： Practical Deep Learning for Coders 2022 [8SF_h3xF3cE].webm',
-                'DL/Lesson 2： Practical Deep Learning for Coders 2022 [F4tvM4Vb3A0].webm',
-                'DL/Lesson 3： Practical Deep Learning for Coders 2022 [hBBOjCiFcuo].webm',
-                'DL/Lesson 4： Practical Deep Learning for Coders 2022 [toUgBQv1BT8].webm',
-                'DL/Lesson 5： Practical Deep Learning for Coders 2022 [_rXzeWq4C6w].webm',
-                'DL/Lesson 6： Practical Deep Learning for Coders 2022 [AdhG64NF76E].mkv',
-                'DL/Lesson 7： Practical Deep Learning for Coders 2022 [p4ZZq0736Po].mkv',
-                'DL/Lesson 8 - Practical Deep Learning for Coders 2022 [htiNBPxcXgo].mkv',
-                'DL/Lesson 9： Deep Learning Foundations to Stable Diffusion [_7rMfsA24Ls].webm',
-                'DS620/01-01-DS610LectureOne_Introduction.mp4',
-                'DS620/02-01-DS620LectureTwo-Perceptron.mp4',
-                'DS620/03-01-DS620LectureThree-GD.mp4',
-                'DS620/04-01-DS620LectureFour-ِActivationFuctions.mp4',
-                'DS620/05-01-DS620LectureFive-ِOptimization.mp4'
+                { title: 'CS229 Lec 1 - Introduction', file: '02_CS229_Machine_Learning/Stanford CS229 Machine Learning I Introduction I 2022 I Lecture 1 [Bl4Feh_Mjvo].webm' },
+                { title: 'CS229 Lec 2 - Supervised Learning, LMS', file: '02_CS229_Machine_Learning/Stanford CS229 Machine Learning I Supervised learning setup, LMS I 2022 I Lecture 2 [gqKaVgQxEJ0].webm' },
+                { title: 'CS229 Lec 3 - Logistic Regression', file: '02_CS229_Machine_Learning/Stanford CS229 I Weighted Least Squares, Logistic regression, Newton\'s Method I 2022 I Lecture 3 [k_pDh_68K6c].webm' },
+                { title: 'CS229 Lec 4 - GLMs', file: '02_CS229_Machine_Learning/Stanford CS229 Machine Learning I Exponential family, Generalized Linear Models I 2022 I Lecture 4 [goDDnBbJQ4g].mkv' },
+                { title: 'CS229 Lec 5 - GDA, Naive Bayes', file: '02_CS229_Machine_Learning/Stanford CS229 Machine Learning I Gaussian discriminant analysis, Naive Bayes I 2022 I Lecture 5 [RMy_1mO4HLk].mkv' },
+                { title: 'CS229 Lec 6 - Laplace Smoothing', file: '02_CS229_Machine_Learning/Stanford CS229 Machine Learning I Naive Bayes, Laplace Smoothing I 2022 I Lecture 6 [ADj95edZc0w].mkv' },
+                { title: 'CS229 Lec 7 - Kernels', file: '02_CS229_Machine_Learning/Stanford CS229 Machine Learning I Kernels I 2022 I Lecture 7 [dzDOqrac9Ks].mkv' },
+                { title: 'CS229 Lec 8 - Neural Networks 1', file: '02_CS229_Machine_Learning/Stanford CS229 Machine Learning I Neural Networks 1 I 2022 I Lecture 8 [ZMxfDWPXmjc].mkv' },
+                { title: 'CS229 Lec 9 - Backpropagation', file: '02_CS229_Machine_Learning/Stanford CS229 Machine Learning I Neural Networks 2 (backprop) I 2022 I Lecture 9 [UbtTv7j1tzU].mkv' },
+                { title: 'CS229 Lec 10 - Bias-Variance', file: '02_CS229_Machine_Learning/Stanford CS229 Machine Learning I Bias - Variance, Regularization I 2022 I Lecture 10 [7AQYw5FOVcw].mkv' },
+                { title: 'CS229 Lec 11 - Feature/Model Selection', file: '02_CS229_Machine_Learning/Stanford CS229 Machine Learning I Feature \u29F8 Model selection, ML Advice I 2022 I Lecture 11 [NirZnqwYfYU].mkv' }
             ]
         },
         {
-            name: 'أسابيع 12-19: LLMs من الصفر (CS336 + mini-rag)',
+            name: 'أسابيع 8-11: Deep Learning (CS230)',
             tasks: [
-                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 1： Overview and Tokenization [SQ3fZ1sAqXI].webm',
-                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lec. 2： Pytorch, Resource Accounting [msHyYioAyNE].webm',
-                '336/Stanford CS336 Lang. Modeling from Scratch ｜ Spring 2025 ｜ Lec. 3： Architectures, Hyperparameters [ptFiH_bHnJw].webm',
-                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 4： Mixture of experts [LPv1KfUXLCo].webm',
-                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 5： GPUs [6OBtO9niT00].webm',
-                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 6： Kernels, Triton [E8Mju53VB00].webm',
-                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 7： Parallelism 1 [l1RJcDjzK8M].webm',
-                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 8： Parallelism 2 [LHpr5ytssLo].webm',
-                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 9： Scaling laws 1 [6Q-ESEmDf4Q].webm',
-                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 10： Inference [fcgPYo3OtV0].webm',
-                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 11： Scaling laws 2 [OSYuUqGBQxw].webm',
-                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 12： Evaluation [x-R5l2HsXqM].webm',
-                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 13： Data 1 [WePxmeXU1xg].webm',
-                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 14： Data 2 [9Cd0THLS1t0].webm',
-                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 15： Alignment - SFT⧸RLHF [Dfu7vC9jo4w].webm',
-                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 16： Alignment - RL 1 [46f2QTDB08Q].webm',
-                '336/Stanford CS336 Language Modeling from Scratch ｜ Spring 2025 ｜ Lecture 17： Alignment - RL 2 [JdGFdViaOJk].webm',
-                'mini-rag/027 - mini-RAG ｜ 01 ｜ About the Course [Arabic].mkv',
-                'mini-rag/026 - mini-RAG ｜ 02 ｜ What will we build.mkv',
-                'mini-rag/025 - mini-RAG ｜ 03 ｜ Setup your tools.mkv',
-                'mini-rag/024 - mini-RAG ｜ 04 ｜ Project Architecture.mkv',
-                'mini-rag/023 - mini-RAG ｜ 05 ｜ Welcome to FastAPI.mkv',
-                'mini-rag/022 - mini-RAG ｜ 06 ｜ Nested Routes + Env Values.mkv',
-                'mini-rag/021 - mini-RAG ｜ 07 ｜ Uploading a File.mkv',
-                'mini-rag/020 - mini-RAG ｜ 08 ｜ File Processing.mkv',
-                'mini-rag/019 - mini-RAG ｜ 09 ｜ Docker - MongoDB - Motor.mkv',
-                'mini-rag/018 - mini-RAG ｜ 10 ｜ Mongo Schemes and Models.mkv',
-                'mini-rag/017 - mini-RAG ｜ 11 ｜ Mongo Indexing.mkv',
-                'mini-rag/016 - mini-RAG ｜ 12 ｜ Data Pipeline Enhancements.mkv',
-                'mini-rag/015 - mini-RAG ｜ 13 ｜ Checkpoint-1.mkv',
-                'mini-rag/014 - mini-RAG ｜ 14 ｜ LLM Factory.mkv',
-                'mini-rag/013 - mini-RAG ｜ 15 ｜ Vector DB Factory ｜ QDrant.mkv',
-                'mini-rag/012 - mini-RAG ｜ 16 ｜ Semantic Search.mkv',
-                'mini-rag/011 - mini-RAG ｜ 17 ｜ Augmented Answers.mkv',
-                'mini-rag/009 - mini-RAG ｜ 18 ｜ Checkpoint-2.mkv',
-                'mini-rag/008 - mini-RAG ｜ 19 ｜ Ollama Local LLM Server.mkv',
-                'mini-rag/006 - mini-RAG ｜ 20 ｜ From Mongo to Postgres.mkv',
-                'mini-rag/004 - mini-RAG ｜ 21 ｜ The Way to PGVector.mkv',
-                'mini-rag/003 - mini-RAG ｜ 22 ｜ App Deployment ｜ Step 1.mkv',
-                'mini-rag/002 - mini-RAG ｜ 23 ｜ App Deployment ｜ Step 2.mkv'
+                { title: 'CS230 Lec 1 - Introduction', file: '03_CS230_Deep_Learning/Stanford CS230\uFF1A Deep Learning \uFF5C Autumn 2018 \uFF5C Lecture 1 - Class Introduction & Logistics, Andrew Ng [PySo_6S4ZAg].webm' },
+                { title: 'CS230 Lec 2 - DL Intuition', file: '03_CS230_Deep_Learning/Stanford CS230\uFF1A Deep Learning \uFF5C Autumn 2018 \uFF5C Lecture 2 - Deep Learning Intuition [AwQHqWyHRpU].webm' },
+                { title: 'CS230 Lec 3 - Full-Cycle DL', file: '03_CS230_Deep_Learning/Stanford CS230\uFF1A Deep Learning \uFF5C Autumn 2018 \uFF5C Lecture 3 - Full-Cycle Deep Learning Projects [JUJNGv_sb4Y].mkv' },
+                { title: 'CS230 Lec 4 - GANs', file: '03_CS230_Deep_Learning/Stanford CS230\uFF1A Deep Learning \uFF5C Autumn 2018 \uFF5C Lecture 4 - Adversarial Attacks \u29F8 GANs [ANszao6YQuM].mkv' },
+                { title: 'CS230 Lec 5 - AI + Healthcare', file: '03_CS230_Deep_Learning/Stanford CS230\uFF1A Deep Learning \uFF5C Autumn 2018 \uFF5C Lecture 5 - AI + Healthcare [IM9ANAbufYM].mkv' },
+                { title: 'CS230 Lec 6 - Project Strategy', file: '03_CS230_Deep_Learning/Stanford CS230\uFF1A Deep Learning \uFF5C Autumn 2018 \uFF5C Lecture 6 - Deep Learning Project Strategy [G5FNYxbW_Qw].mkv' },
+                { title: 'CS230 Lec 7 - Interpretability', file: '03_CS230_Deep_Learning/Stanford CS230\uFF1A Deep Learning \uFF5C Autumn 2018 \uFF5C Lecture 7 - Interpretability of Neural Network [gCJCgQW_LKc].mkv' },
+                { title: 'CS230 Lec 8 - Career Advice', file: '03_CS230_Deep_Learning/Stanford CS230\uFF1A Deep Learning \uFF5C Autumn 2018 \uFF5C Lecture 8 - Career Advice \u29F8 Reading Research Papers [733m6qBH-jI].webm' },
+                { title: 'CS230 Lec 9 - Deep RL', file: '03_CS230_Deep_Learning/Stanford CS230\uFF1A Deep Learning \uFF5C Autumn 2018 \uFF5C Lecture 9 - Deep Reinforcement Learning [NP2XqpgTJyo].mkv' },
+                { title: 'CS230 Lec 10 - Chatbots / Closing', file: '03_CS230_Deep_Learning/Stanford CS230\uFF1A Deep Learning \uFF5C Autumn 2018 \uFF5C Lecture 10 - Chatbots \u29F8 Closing Remarks [IFLstgCNOA4].mkv' }
             ]
         },
         {
-            name: 'أسابيع 20-24: مشاريع + Production + Portfolio',
+            name: 'أسابيع 12-19: LLMs من الصفر (CS336)',
             tasks: [
-                'ml projects/Air Quality Index Prediction [0myaZxl4XWw].webm',
-                'ml projects/Diabetes Prediction [AxYgzie4x2E].mkv',
-                'ml projects/FAKE NEWS DETECTION [CkiXRQvz4Z4].webm',
-                'ml projects/HEART DISEASE DETECTION [F_9gGyCs3YY].mkv',
-                'ml projects/Image Classification using CNN [qm56XcRBXWc].mkv',
-                'ml projects/MOVIE RECOMMENDATION SYSTEM [kxT8AursXXw].mkv',
-                'ml projects/STOCK PRICE PREDICTION [tn07dCSFOfQ].mkv',
-                'ml projects/TITANIC SURVIVAL PREDICTION [cRYSIR6LaNQ].mkv',
-                'ml projects/TWITTER SENTIMENT ANALYSIS [4YGkfAd2iXM].webm',
-                'ml projects/WINE QUALITY PREDICTION [MyllYgc-kh8].mkv',
-                'data engineering/The Data Engineering Bootcamp Zero to Mastery (كامل)',
-                'CS231N/Stanford CS231N Deep Learning for Computer Vision ｜ Spring 2025 (كل المحاضرات)',
-                'إعادة بناء mini-RAG كامل من الصفر (مشروع التخرج)',
-                'إنشاء Portfolio على GitHub + نشر النموذج'
+                { title: 'CS336 Lec 1 - Tokenization', file: '04_CS336_LLMs_From_Scratch/Stanford CS336 Language Modeling from Scratch \uFF5C Spring 2025 \uFF5C Lecture 1\uFF1A Overview and Tokenization [SQ3fZ1sAqXI].webm' },
+                { title: 'CS336 Lec 2 - Pytorch', file: '04_CS336_LLMs_From_Scratch/Stanford CS336 Language Modeling from Scratch \uFF5C Spring 2025 \uFF5C Lec. 2\uFF1A Pytorch, Resource Accounting [msHyYioAyNE].webm' },
+                { title: 'CS336 Lec 3 - Architectures', file: '04_CS336_LLMs_From_Scratch/Stanford CS336 Lang. Modeling from Scratch \uFF5C Spring 2025 \uFF5C Lec. 3\uFF1A Architectures, Hyperparameters [ptFiH_bHnJw].webm' },
+                { title: 'CS336 Lec 4 - Mixture of Experts', file: '04_CS336_LLMs_From_Scratch/Stanford CS336 Language Modeling from Scratch \uFF5C Spring 2025 \uFF5C Lecture 4\uFF1A Mixture of experts [LPv1KfUXLCo].webm' },
+                { title: 'CS336 Lec 5 - GPUs', file: '04_CS336_LLMs_From_Scratch/Stanford CS336 I Language Modeling from Scratch \uFF5C Spring 2025 \uFF5C Lecture 5\uFF1A GPUs [6OBtO9niT00].webm' },
+                { title: 'CS336 Lec 6 - Kernels, Triton', file: '04_CS336_LLMs_From_Scratch/Stanford CS336 Language Modeling from Scratch \uFF5C Spring 2025 \uFF5C Lecture 6\uFF1A Kernels, Triton [E8Mju53VB00].webm' },
+                { title: 'CS336 Lec 7 - Parallelism 1', file: '04_CS336_LLMs_From_Scratch/Stanford CS336 Language Modeling from Scratch \uFF5C Spring 2025 \uFF5C Lecture 7\uFF1A Parallelism 1 [l1RJcDjzK8M].webm' },
+                { title: 'CS336 Lec 8 - Parallelism 2', file: '04_CS336_LLMs_From_Scratch/Stanford CS336 Language Modeling from Scratch \uFF5C Spring 2025 \uFF5C Lecture 8\uFF1A Parallelism 2 [LHpr5ytssLo].webm' },
+                { title: 'CS336 Lec 9 - Scaling Laws 1', file: '04_CS336_LLMs_From_Scratch/Stanford CS336 Language Modeling from Scratch \uFF5C Spring 2025 \uFF5C Lecture 9\uFF1A Scaling laws 1 [6Q-ESEmDf4Q].webm' },
+                { title: 'CS336 Lec 10 - Inference', file: '04_CS336_LLMs_From_Scratch/Stanford CS336 Language Modeling from Scratch \uFF5C Spring 2025 \uFF5C Lecture 10\uFF1A Inference [fcgPYo3OtV0].webm' },
+                { title: 'CS336 Lec 11 - Scaling Laws 2', file: '04_CS336_LLMs_From_Scratch/Stanford CS336 Language Modeling from Scratch \uFF5C Spring 2025 \uFF5C Lecture 11\uFF1A Scaling laws 2 [OSYuUqGBQxw].webm' },
+                { title: 'CS336 Lec 12 - Evaluation', file: '04_CS336_LLMs_From_Scratch/Stanford CS336 Language Modeling from Scratch \uFF5C Spring 2025 \uFF5C Lecture 12\uFF1A Evaluation [x-R5l2HsXqM].webm' },
+                { title: 'CS336 Lec 13 - Data 1', file: '04_CS336_LLMs_From_Scratch/Stanford CS336 Language Modeling from Scratch \uFF5C Spring 2025 \uFF5C Lecture 13\uFF1A Data 1 [WePxmeXU1xg].webm' },
+                { title: 'CS336 Lec 14 - Data 2', file: '04_CS336_LLMs_From_Scratch/Stanford CS336 Language Modeling from Scratch \uFF5C Spring 2025 \uFF5C Lecture 14\uFF1A Data 2 [9Cd0THLS1t0].webm' },
+                { title: 'CS336 Lec 15 - Alignment SFT/RLHF', file: '04_CS336_LLMs_From_Scratch/Stanford CS336 Language Modeling from Scratch \uFF5C Spring 2025 \uFF5C Lecture 15\uFF1A Alignment - SFT\u29F8RLHF [Dfu7vC9jo4w].webm' },
+                { title: 'CS336 Lec 16 - Alignment RL 1', file: '04_CS336_LLMs_From_Scratch/Stanford CS336 Language Modeling from Scratch \uFF5C Spring 2025 \uFF5C Lecture 16\uFF1A Alignment - RL 1 [46f2QTDB08Q].webm' },
+                { title: 'CS336 Lec 17 - Alignment RL 2', file: '04_CS336_LLMs_From_Scratch/Stanford CS336 Language Modeling from Scratch \uFF5C Spring 2025 \uFF5C Lecture 17\uFF1A Alignment - RL 2 [JdGFdViaOJk].webm' }
+            ]
+        },
+        {
+            name: 'mini-RAG Course',
+            tasks: [
+                { title: 'mini-RAG 01 - About the Course', file: '05_mini_rag/10_mini_rag_Course/027 - mini-RAG \uFF5C 01 \uFF5C About the Course \u0645\u0627\u0630\u0627 \u0648\u0644\u0645\u0640\u0640\u0640\u0627\u0630\u0627.webm' },
+                { title: 'mini-RAG 02 - What will we build', file: '05_mini_rag/10_mini_rag_Course/026 - mini-RAG \uFF5C 02 \uFF5C What will we build \u0645\u0627\u0630\u0627 \u0633\u0646\u0628\u0646\u0649 \u0641\u064A \u0627\u0644\u0645\u0634\u0631\u0648\u0639.webm' },
+                { title: 'mini-RAG 03 - Setup your tools', file: '05_mini_rag/10_mini_rag_Course/025 - mini-RAG \uFF5C 03 \uFF5C Setup your tools \u0627\u0644\u0623\u062F\u0648\u0627\u062A \u0627\u0644\u0623\u0633\u0627\u0633\u064A\u0629.webm' },
+                { title: 'mini-RAG 04 - Project Architecture', file: '05_mini_rag/10_mini_rag_Course/024 - mini-RAG \uFF5C 04 \uFF5C Project Architecture.webm' },
+                { title: 'mini-RAG 05 - Welcome to FastAPI', file: '05_mini_rag/10_mini_rag_Course/023 - mini-RAG \uFF5C 05 \uFF5C Welcome to FastAPI.webm' },
+                { title: 'mini-RAG 06 - Nested Routes + Env', file: '05_mini_rag/10_mini_rag_Course/022 - mini-RAG \uFF5C 06 \uFF5C Nested Routes + Env Values.webm' },
+                { title: 'mini-RAG 07 - Uploading a File', file: '05_mini_rag/10_mini_rag_Course/021 - mini-RAG \uFF5C 07 \uFF5C Uploading a File.webm' },
+                { title: 'mini-RAG 08 - File Processing', file: '05_mini_rag/10_mini_rag_Course/020 - mini-RAG \uFF5C 08 \uFF5C File Processing.webm' },
+                { title: 'mini-RAG 09 - Docker MongoDB Motor', file: '05_mini_rag/10_mini_rag_Course/019 - mini-RAG \uFF5C 09 \uFF5C Docker - MongoDB - Motor.webm' },
+                { title: 'mini-RAG 10 - Mongo Schemes & Models', file: '05_mini_rag/10_mini_rag_Course/018 - mini-RAG \uFF5C 10 \uFF5C Mongo Schemes and Models.webm' },
+                { title: 'mini-RAG 11 - Mongo Indexing', file: '05_mini_rag/10_mini_rag_Course/017 - mini-RAG \uFF5C 11 \uFF5C Mongo Indexing.webm' },
+                { title: 'mini-RAG 12 - Data Pipeline', file: '05_mini_rag/10_mini_rag_Course/016 - mini-RAG \uFF5C 12 \uFF5C Data Pipeline Enhancements.webm' },
+                { title: 'mini-RAG 13 - Checkpoint 1', file: '05_mini_rag/10_mini_rag_Course/015 - mini-RAG \uFF5C 13 \uFF5C Checkpoint-1 \uFF5C What have we learned so far\uFF1F.webm' },
+                { title: 'mini-RAG 14 - LLM Factory', file: '05_mini_rag/10_mini_rag_Course/014 - mini-RAG \uFF5C 14 \uFF5C LLM Factory.webm' },
+                { title: 'mini-RAG 15 - Vector DB QDrant', file: '05_mini_rag/10_mini_rag_Course/013 - mini-RAG \uFF5C 15 \uFF5C Vector DB Factory \uFF5C QDrant.webm' },
+                { title: 'mini-RAG 16 - Semantic Search', file: '05_mini_rag/10_mini_rag_Course/012 - mini-RAG \uFF5C 16 \uFF5C Semantic Search.webm' },
+                { title: 'mini-RAG 17 - Augmented Answers', file: '05_mini_rag/10_mini_rag_Course/011 - mini-RAG \uFF5C 17 \uFF5C Augmented Answers.webm' },
+                { title: 'mini-RAG 18 - Checkpoint 2 Fixes', file: '05_mini_rag/10_mini_rag_Course/009 - mini-RAG \uFF5C 18 \uFF5C Checkpoint-2 \uFF5C Fixes.webm' },
+                { title: 'mini-RAG 19 - Ollama Local LLM', file: '05_mini_rag/10_mini_rag_Course/008 - mini-RAG \uFF5C 19 \uFF5C Ollama Local LLM Server.webm' },
+                { title: 'mini-RAG 20 - Postgres + SQLAlchemy', file: '05_mini_rag/10_mini_rag_Course/006 - mini-RAG \uFF5C 20 \uFF5C From Mongo to Postgres + SQLAlchemy & Alembic.webm' },
+                { title: 'mini-RAG 21 - PGVector', file: '05_mini_rag/10_mini_rag_Course/004 - mini-RAG \uFF5C 21 \uFF5C The Way to PGVector.webm' },
+                { title: 'mini-RAG 22 - Deployment Step 1', file: '05_mini_rag/10_mini_rag_Course/003 - mini-RAG \uFF5C 22 \uFF5C App Deployment \uFF5C Step 1\u29F82.webm' },
+                { title: 'mini-RAG 23 - Deployment Step 2', file: '05_mini_rag/10_mini_rag_Course/002 - mini-RAG \uFF5C 23 \uFF5C App Deployment \uFF5C Step 2\u29F82.webm' }
+            ]
+        },
+        {
+            name: 'مشاريع ML تطبيقية',
+            tasks: [
+                { title: 'Air Quality Prediction', file: '06_Projects/11_ML_Projects/Air Quality Index Prediction in Python \uFF5C Machine Learning Projects \uFF5C GeeksforGeeks [0myaZxl4XWw].webm' },
+                { title: 'Diabetes Prediction', file: '06_Projects/11_ML_Projects/Diabetes Prediction in Machine Learning using Python \uFF5C Machine Learning Projects \uFF5C GeeksforGeeks [AxYgzie4x2E].mkv' },
+                { title: 'Fake News Detection', file: '06_Projects/11_ML_Projects/FAKE NEWS DETECTION Using MACHINE LEARNING \uFF5C Machine Learning Projects \uFF5C GeeksforGeeks [CkiXRQvz4Z4].webm' },
+                { title: 'Heart Disease Detection', file: '06_Projects/11_ML_Projects/HEART DISEASE DETECTION using MACHINE LEARNING \uFF5C Machine Learning Projects \uFF5C GeeksforGeeks [F_9gGyCs3YY].mkv' },
+                { title: 'Image Classification CNN', file: '06_Projects/11_ML_Projects/Image Classification using CNN \uFF5C Machine Learning Projects \uFF5C GeeksforGeeks [qm56XcRBXWc].mkv' },
+                { title: 'Movie Recommendation', file: '06_Projects/11_ML_Projects/MOVIE RECOMMENDATION SYSTEM Using Machine Learning \uFF5C Machine Leaning Projects \uFF5C GeeksforGeeks [kxT8AursXXw].mkv' },
+                { title: 'Stock Price Prediction', file: '06_Projects/11_ML_Projects/STOCK PRICE PREDICTION using Machine Learning\uD83D\uDCC8 \uFF5C Machine Learning Projects \uFF5C GeeksforGeeks [tn07dCSFOfQ].mkv' },
+                { title: 'Titanic Survival', file: '06_Projects/11_ML_Projects/TITANIC SURVIVAL PREDICTION using TensorFlow \uFF5C Machine Learning Projects \uFF5C GeeksforGeeks [cRYSIR6LaNQ].mkv' },
+                { title: 'Twitter Sentiment Analysis', file: '06_Projects/11_ML_Projects/TWITTER SENTIMENT ANALYSIS (NLP) \uFF5C Machine Learning Projects \uFF5C GeeksforGeeks [4YGkfAd2iXM].webm' },
+                { title: 'Wine Quality Prediction', file: '06_Projects/11_ML_Projects/\uD83C\uDF77 WINE QUALITY PREDICTION using RANDOM FOREST Algorithm \uFF5C Machine Learning Projects \uFF5C GeeksforGeeks [MyllYgc-kh8].mkv' }
+            ]
+        },
+        {
+            name: 'Production + Portfolio',
+            tasks: [
+                { title: 'Big Data Engineering Part 1', file: '00_Loose_Files_Root/Big Data Engineering Full Course Part 1 _ 17 Hours.mp4' },
+                { title: 'Big Data Engineering Part 2', file: '00_Loose_Files_Root/Big Data Engineering Full Course Part 2 _ 17 Hours.mp4' },
+                { title: 'Python Pandas Tutorial', file: '00_Loose_Files_Root/Complete Python Pandas Data Science Tutorial! (Reading CSV_Excel files, Sorting, Filtering, Groupby).mp4' },
+                { title: 'إعادة بناء mini-RAG كامل من الصفر (مشروع التخرج)', file: null }
             ]
         }
     ]
 });
+// =============================================================
+//  🎬 VideoMover - نظام نقل الفيديوهات
+// =============================================================
 
-console.log('✅ تم إضافة خطة AI Engineer Mastery الكاملة (24 أسبوع) إلى PlanTemplates');
+const VideoMover = {
+    SERVER_URL: 'http://localhost:7777',
+    serverOnline: false,
 
-console.log('✅ Features v3.3 loaded: XP + Habits + Kanban + Countdown + Templates + Charts + Sticky Notes + PDF + Weekly Compare');
+    async checkServer() {
+        try {
+            const resp = await fetch(this.SERVER_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'check', file: 'test' }),
+                signal: AbortSignal.timeout(2000)
+            });
+            this.serverOnline = resp.ok || resp.status === 404;
+            return this.serverOnline;
+        } catch {
+            this.serverOnline = false;
+            return false;
+        }
+    },
+
+    async moveFile(filePath) {
+        try {
+            const resp = await fetch(this.SERVER_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'move', file: filePath }),
+                signal: AbortSignal.timeout(10000)
+            });
+            const result = await resp.json();
+            if (resp.ok && result.success) {
+                return { success: true, message: result.message };
+            }
+            return { success: false, message: result.error || 'خطأ غير معروف' };
+        } catch (err) {
+            return { success: false, message: 'تعذر الاتصال: ' + err.message };
+        }
+    },
+
+    async undoMove(filePath) {
+        try {
+            const resp = await fetch(this.SERVER_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'undo', file: filePath })
+            });
+            return await resp.json();
+        } catch {
+            return { success: false, message: 'تعذر الاتصال بالسيرفر' };
+        }
+    },
+
+    downloadMoveScript(filePath, title, rootPath) {
+        const cleanFilePath = filePath.replace(/\\/g, '/');
+        const cleanTitle = (title || 'video').replace(/[^a-zA-Z0-9_\-]/g, '_').substring(0, 50);
+        const root = rootPath || '/Volumes/dt/AI-ENGINEER';
+
+        const script = `#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import shutil
+from pathlib import Path
+
+root = Path(r"${root}")
+video = root / r"${cleanFilePath}"
+done_folder = video.parent / "✅_منتهي"
+
+if not video.exists():
+    print(f"⚠️ الملف غير موجود: {video}")
+else:
+    done_folder.mkdir(exist_ok=True)
+    dest = done_folder / video.name
+    if dest.exists():
+        print(f"⚠️ موجود بالفعل: {dest}")
+    else:
+        shutil.move(str(video), str(dest))
+        print(f"✅ تم نقل: {video.name}")
+        print(f"   إلى: {dest}")
+`.trim();
+
+        const blob = new Blob([script], { type: 'text/x-python' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `move_${cleanTitle}.py`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        return a.download;
+    }
+};
+
+window.VideoMover = VideoMover;
+
+VideoMover.checkServer().then(online => {
+    console.log(online ? '🟢 Video Mover Server متصل' : '🔴 Video Mover Server غير متصل');
+});
+
+setInterval(() => VideoMover.checkServer(), 30000);
+
+// =============================================================
+//  🔗 تعديل renderTask لدعم روابط فيديوهات AI Engineer
+//  ⚠️ ترتيب البارامترات: (planId, groupId, task) مطابق للأصل
+// =============================================================
+
+(function patchRenderTaskForVideos() {
+    const _originalRenderTask = window.renderTask;
+
+    window.renderTask = function(planId, groupId, task) {
+        const plan = (data.plans || []).find(p => p.id === planId);
+
+        const isAIPlan = plan && plan.templateId === 'tpl_ai_engineer_full';
+        const hasFile = task && task.file && task.file.trim().length > 0;
+
+        if (!isAIPlan || !hasFile) {
+            if (typeof _originalRenderTask === 'function') {
+                return _originalRenderTask(planId, groupId, task);
+            }
+            return '';
+        }
+
+        const rootPath = plan.rootPath || '/Volumes/dt/AI-ENGINEER';
+        const fullPath = `file://${rootPath}/${encodeURI(task.file)}`;
+
+        const isDone = task.status === 'done';
+        const isPostponed = task.status === 'postponed';
+        const subsCount = (task.subs || []).length;
+        const subsDone = (task.subs || []).filter(s => s.status === 'done').length;
+        const isOverdue = task.date && new Date(task.date) < new Date() && !isDone;
+        const hasTags = (task.tags || []).length > 0;
+        const hasNotes = task.notes && task.notes.trim().length > 0;
+
+        const safeFile = task.file.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+        const safeName = (task.name || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+
+        const serverOnline = window.VideoMover && window.VideoMover.serverOnline;
+        const serverDot = serverOnline ? '🟢' : '🔴';
+        const serverTitle = serverOnline ? 'السيرفر متصل - نقل تلقائي' : 'السيرفر غير متصل - سكريبت يدوي';
+
+        return `
+            <div class="task"
+                 draggable="true"
+                 data-task-id="${task.id}"
+                 data-group-id="${groupId}"
+                 data-plan-id="${planId}"
+                 style="${isDone ? 'opacity:0.6;' : ''}">
+
+                <div class="drag-handle" title="اسحب لإعادة الترتيب">⠿</div>
+
+                <div class="task-check ${isDone ? 'done' : isPostponed ? 'postponed' : ''}"
+                     onclick="cycleTaskStatus('${planId}','${groupId}','${task.id}')">
+                    ${isDone ? '✓' : isPostponed ? '⏸' : ''}
+                </div>
+
+                <span class="task-name ${isDone ? 'done' : ''}" style="display:flex;align-items:center;gap:8px;flex:1">
+                    <a href="${fullPath}" target="_blank"
+                       onclick="event.stopPropagation();"
+                       style="display:flex;align-items:center;gap:6px;color:inherit;text-decoration:${isDone ? 'line-through' : 'none'};flex:1"
+                       title="🎬 اضغط لفتح الفيديو">
+                        <span style="font-size:1.1rem;min-width:20px">${isDone ? '✅' : '📹'}</span>
+                        <span>${task.name}</span>
+                    </a>
+                </span>
+
+                <div class="task-badges">
+                    ${hasTags ? task.tags.map(tag => `<span class="badge badge-tag">${tag}</span>`).join('') : ''}
+                    ${hasNotes ? '<span class="badge badge-date" title="ملاحظات">📄</span>' : ''}
+                    ${subsCount > 0 ? `<span class="badge badge-count">📝 ${subsDone}/${subsCount}</span>` : ''}
+                    ${task.date ? `<span class="badge ${isOverdue ? 'badge-overdue' : 'badge-date'}">${isOverdue ? '⏰' : '📅'} ${formatDate(task.date)}</span>` : ''}
+                    <span class="badge" style="font-size:0.6rem;padding:1px 3px;opacity:0.4" title="${serverTitle}">${serverDot}</span>
+                </div>
+
+                <div class="task-actions">
+                    ${isDone ? `
+                        <button class="task-btn" onclick="event.stopPropagation();undoVideoDone('${planId}','${groupId}','${task.id}','${safeFile}','${safeName}')" title="تراجع">↩️</button>
+                    ` : `
+                        <button class="task-btn" onclick="event.stopPropagation();markVideoDone('${planId}','${groupId}','${task.id}','${safeFile}','${safeName}')"
+                                title="✅ تم - نقل للمنتهي"
+                                style="background:#10b981;color:white;border-radius:6px;padding:2px 10px;font-size:0.8rem;font-weight:600">
+                            ✅ تم
+                        </button>
+                    `}
+                    <button class="task-btn sub" onclick="openSubTasks('${planId}','${groupId}','${task.id}')" title="فرعية">📝</button>
+                    <button class="task-btn" onclick="openTaskNotes('${planId}','${groupId}','${task.id}')" title="ملاحظات">📄</button>
+                    <button class="task-btn" onclick="openTaskTags('${planId}','${groupId}','${task.id}')" title="تصنيفات">🏷️</button>
+                    <button class="task-btn" onclick="setTaskDate('${planId}','${groupId}','${task.id}')" title="تاريخ">📅</button>
+                    <button class="task-btn" onclick="startPomodoroForTask('${planId}','${groupId}','${task.id}')" title="بومودورو">🍅</button>
+                    <button class="task-btn postpone" onclick="postponeTask('${planId}','${groupId}','${task.id}')" title="تأجيل">⏸</button>
+                    <button class="task-btn delete" onclick="deleteTask('${planId}','${groupId}','${task.id}')" title="حذف">🗑</button>
+                </div>
+            </div>
+        `;
+    };
+
+    console.log('🔗 renderTask patched for AI Engineer video links');
+})();
+
+// =============================================================
+//  ✅ markVideoDone
+// =============================================================
+
+window.markVideoDone = async function(planId, groupId, taskId, filePath, title) {
+    const found = findTask(planId, groupId, taskId);
+    if (!found || !found.task) {
+        toast('لم يتم العثور على المهمة!', 'error');
+        return;
+    }
+
+    if (found.task.status === 'done') {
+        toast('هذا الفيديو مُكتمل بالفعل ✅', 'info');
+        return;
+    }
+
+    found.task.status = 'done';
+    save();
+
+    XPSystem.addXP(XPSystem.xpRewards.videoWatched, 'فيديو: ' + (title || '').substring(0, 30));
+
+    if (typeof Achievements !== 'undefined' && Achievements.checkAndNotify) Achievements.checkAndNotify();
+    if (typeof updateStreak === 'function') updateStreak();
+
+    if (filePath) {
+        const plan = (data.plans || []).find(p => p.id === planId);
+        const rootPath = plan?.rootPath || '/Volumes/dt/AI-ENGINEER';
+
+        await VideoMover.checkServer();
+
+        if (VideoMover.serverOnline) {
+            toast('⏳ جاري نقل الملف...', 'info');
+            const result = await VideoMover.moveFile(filePath);
+
+            if (result.success) {
+                toast(`✅ تم! "${(title || '').substring(0, 25)}" → مجلد المنتهي`, 'success');
+            } else {
+                toast(`⚠️ فشل النقل: ${result.message}`, 'warning');
+                if (confirm('تنزيل سكريبت نقل يدوي؟')) {
+                    VideoMover.downloadMoveScript(filePath, title, rootPath);
+                }
+            }
+        } else {
+            const fileName = VideoMover.downloadMoveScript(filePath, title, rootPath);
+            toast(`✅ تم. شغّل: python3 ${fileName}`, 'success');
+        }
+    } else {
+        toast(`✅ "${(title || '').substring(0, 25)}" مكتمل!`, 'success');
+    }
+
+    render();
+};
+
+// =============================================================
+//  ↩️ undoVideoDone
+// =============================================================
+
+window.undoVideoDone = async function(planId, groupId, taskId, filePath, title) {
+    const found = findTask(planId, groupId, taskId);
+    if (!found || !found.task) return;
+
+    if (found.task.status !== 'done') {
+        toast('هذا الفيديو ليس مكتملاً', 'info');
+        return;
+    }
+
+    if (!confirm(`إرجاع "${title || 'الفيديو'}" إلى غير مكتمل؟`)) return;
+
+    found.task.status = 'pending';
+    save();
+
+    if (filePath && VideoMover.serverOnline) {
+        const result = await VideoMover.undoMove(filePath);
+        if (result.success) {
+            toast('↩️ تم إرجاع الفيديو والملف', 'success');
+        } else {
+            toast('↩️ تم إرجاع الحالة فقط', 'warning');
+        }
+    } else {
+        toast('↩️ تم إرجاع حالة الفيديو', 'success');
+    }
+
+    render();
+};
+
+// =============================================================
+//  🔧 دالة مساعدة
+// =============================================================
+
+window.findAITaskByFile = function(filePath) {
+    for (const plan of (data.plans || [])) {
+        if (plan.templateId !== 'tpl_ai_engineer_full') continue;
+        for (const group of (plan.groups || [])) {
+            for (const task of (group.tasks || [])) {
+                if (task.file === filePath) return { plan, group, task };
+            }
+        }
+    }
+    return null;
+};
+
+// =============================================================
+//  تسجيل عالمي
+// =============================================================
+
+window.XPSystem = XPSystem;
+window.HabitTracker = HabitTracker;
+window.Countdowns = Countdowns;
+window.StickyNotes = StickyNotes;
+window.PlanTemplates = PlanTemplates;
+window.WeeklyCompare = WeeklyCompare;
+window.AdvancedCharts = AdvancedCharts;
+window.PDFExport = PDFExport;
+window.KanbanBoard = KanbanBoard;
+
+console.log('✅ Features v3.3 FIXED loaded');
+
+} // إغلاق if (!window.__v33_loaded)
