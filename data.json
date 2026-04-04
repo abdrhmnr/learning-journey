@@ -2795,7 +2795,7 @@
         {
           "id": "p6",
           "name": "Document Loader + Chunking",
-          "status": "pending"
+          "status": "active"
         },
         {
           "id": "p7",
@@ -2959,7 +2959,7 @@
     "three_streak",
     "five_tasks"
   ],
-  "lastModified": "2026-04-04T14:22:32.506Z",
+  "lastModified": "2026-04-04T14:22:55.115Z",
   "pomodoroLog": {
     "2026-03-28": 45,
     "2026-03-30": 50,
@@ -2975,7 +2975,7 @@
   ],
   "_nightActivity": false,
   "_earlyActivity": false,
-  "lastSync": "2026-04-04T14:22:35.517Z",
+  "lastSync": "2026-04-04T14:22:58.615Z",
   "syncDevice": "desktop_oxch",
   "flashcards": {
     "decks": []
