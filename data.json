@@ -2960,12 +2960,12 @@
     "five_tasks",
     "pomodoro_5"
   ],
-  "lastModified": "2026-04-04T19:55:58.319Z",
+  "lastModified": "2026-04-04T21:24:46.413Z",
   "pomodoroLog": {
     "2026-03-28": 45,
     "2026-03-30": 50,
     "2026-04-02": 25,
-    "2026-04-04": 100
+    "2026-04-04": 125
   },
   "weeklyGoals": null,
   "tags": [
@@ -2977,7 +2977,7 @@
   ],
   "_nightActivity": false,
   "_earlyActivity": false,
-  "lastSync": "2026-04-04T19:56:01.790Z",
+  "lastSync": "2026-04-04T21:24:49.836Z",
   "syncDevice": "desktop_oxch",
   "flashcards": {
     "decks": []
