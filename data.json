@@ -2952,7 +2952,7 @@
   "journal": "",
   "journalEntries": [],
   "streak": 1,
-  "lastActive": "2026-04-12",
+  "lastActive": "2026-04-14",
   "theme": "dark",
   "achievements": [
     "first_step",
@@ -2960,7 +2960,7 @@
     "five_tasks",
     "pomodoro_5"
   ],
-  "lastModified": "2026-04-12T20:16:47.945Z",
+  "lastModified": "2026-04-14T15:46:12.936Z",
   "pomodoroLog": {
     "2026-03-28": 45,
     "2026-03-30": 50,
@@ -2978,7 +2978,7 @@
   ],
   "_nightActivity": false,
   "_earlyActivity": false,
-  "lastSync": "2026-04-12T20:16:50.956Z",
+  "lastSync": "2026-04-14T15:46:15.948Z",
   "syncDevice": "desktop_oxch",
   "flashcards": {
     "decks": []
